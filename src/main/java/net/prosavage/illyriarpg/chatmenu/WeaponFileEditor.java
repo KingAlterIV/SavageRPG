@@ -6,23 +6,47 @@ import me.tom.sparse.spigot.chat.menu.element.InputElement;
 import me.tom.sparse.spigot.chat.menu.element.TextElement;
 import net.prosavage.illyriarpg.IllyriaRPG;
 import net.prosavage.illyriarpg.api.files.IWeaponFiles;
+<<<<<<< HEAD
 import net.prosavage.illyriarpg.utils.INumber;
+=======
+import net.prosavage.illyriarpg.utils.Number;
+>>>>>>> 2a3b3d0... Removed unused weapon imports, Cleaned up weapons and some warnings (IntelliJ)
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.List;
+=======
+>>>>>>> 2a3b3d0... Removed unused weapon imports, Cleaned up weapons and some warnings (IntelliJ)
 import java.util.Objects;
 
 public class WeaponFileEditor {
 
+<<<<<<< HEAD
     private INumber INumber = new INumber();
+=======
+    private net.prosavage.illyriarpg.utils.Number Number = new Number();
+>>>>>>> 2a3b3d0... Removed unused weapon imports, Cleaned up weapons and some warnings (IntelliJ)
     private net.prosavage.illyriarpg.api.files.IWeaponFiles IWeaponFiles = new IWeaponFiles();
 
     public void getWeaponCreateMenu(Player player, int page) {
         ChatMenu chatMenu = new ChatMenu();
         int i = 1;
+<<<<<<< HEAD
+=======
+        int maxNumber = page * 10;
+        int minNumber = page * 10 - 11;
+        ArrayList<String> weaponNames = new ArrayList<>();
+        for (String r : IWeaponFiles.getRarityNames()){
+            for (String a : IWeaponFiles.getRarityWeaponNames(r)){
+                weaponNames.add("[" + i + "] [" + r + "] [" + a.replace(".yml", "") + "]");
+                i = i + 1;
+            }
+        }
+        int maxPage = (int) Math.floor(Math.floor(i) / 10);
+>>>>>>> 2a3b3d0... Removed unused weapon imports, Cleaned up weapons and some warnings (IntelliJ)
         int minPage = 0;
         List<String> weaponList = new ArrayList<>();
         int c = 0;

@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+<<<<<<< HEAD
 
 import java.util.*;
 
@@ -21,6 +22,18 @@ public class Weapon {
 
     private Color Color = new Color();
     private NullValues NullValues = new NullValues();
+=======
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+public class Weapon {
+
+    private Number Number = new Number();
+    private Chance Chance = new Chance();
+    private Color Color = new Color();
+>>>>>>> 2a3b3d0... Removed unused weapon imports, Cleaned up weapons and some warnings (IntelliJ)
 
     private final ItemStack itemStack;
     private final ItemMeta meta;
@@ -212,10 +225,17 @@ public class Weapon {
     }
 
     private void setPersistentDataContainers(){
+<<<<<<< HEAD
         String backgroundLore = null;
         String abilityDescriptionLore = null;
         if (this.backgroundLore != null){
             backgroundLore = String.join("||", this.backgroundLore);
+=======
+        String itemLore = null;
+        String itemDescription = null;
+        if (this.lore != null){
+            itemLore = String.join("||", this.lore);
+>>>>>>> 2a3b3d0... Removed unused weapon imports, Cleaned up weapons and some warnings (IntelliJ)
         }
         if (this.abilityDescription != null){
             int a = 0;
@@ -245,6 +265,7 @@ public class Weapon {
         if (this.material == null){
             this.material = setDefaultMaterial(this.itemStack);
         }
+<<<<<<< HEAD
         if ((meta != null)) {
             PersistentDataContainer persistentDataContainer = meta.getPersistentDataContainer();
             persistentDataContainer.set(INamespacedKeys.ITEM_NAME, PersistentDataType.STRING, this.name);
@@ -280,6 +301,27 @@ public class Weapon {
     public Weapon setItemCreator(Player itemCreator){
         this.itemCreator = itemCreator.getUniqueId().toString();
         return this;
+=======
+        PersistentDataContainer persistentDataContainer = meta.getPersistentDataContainer();
+        persistentDataContainer.set(INamespacedKeys.ITEM_NAME, PersistentDataType.STRING,this.name);
+        persistentDataContainer.set(INamespacedKeys.ITEM_MATERIAL,PersistentDataType.STRING,this.material);
+        persistentDataContainer.set(INamespacedKeys.ITEM_RARITY,PersistentDataType.STRING,this.rarity);
+        persistentDataContainer.set(INamespacedKeys.ITEM_CHANCE,PersistentDataType.DOUBLE,this.chance);
+        assert itemLore != null;
+        persistentDataContainer.set(INamespacedKeys.ITEM_LORE,PersistentDataType.STRING, itemLore);
+        persistentDataContainer.set(INamespacedKeys.ITEM_LEVEL,PersistentDataType.INTEGER,this.level);
+        persistentDataContainer.set(INamespacedKeys.ITEM_MAX_DAMAGE,PersistentDataType.DOUBLE,this.maximumDamage);
+        persistentDataContainer.set(INamespacedKeys.ITEM_MIN_DAMAGE,PersistentDataType.DOUBLE,this.minimumDamage);
+        persistentDataContainer.set(INamespacedKeys.ITEM_SCROLL,PersistentDataType.INTEGER,this.scrolls);
+        persistentDataContainer.set(INamespacedKeys.ITEM_GEM,PersistentDataType.INTEGER,this.gems);
+        persistentDataContainer.set(INamespacedKeys.ITEM_ABIILTY_COOLDOWN,PersistentDataType.DOUBLE,this.abilityCooldown);
+        persistentDataContainer.set(INamespacedKeys.ITEM_ABIILTY_NAME,PersistentDataType.STRING,this.name);
+        assert itemDescription != null;
+        persistentDataContainer.set(INamespacedKeys.ITEM_ABIILTY_DESCRIPTION,PersistentDataType.STRING,itemDescription);
+        persistentDataContainer.set(INamespacedKeys.ITEM_ABIILTY_CAST_TYPE,PersistentDataType.STRING,this.castType);
+        persistentDataContainer.set(INamespacedKeys.ITEM_ABIILTY_MANA_COST,PersistentDataType.DOUBLE,this.manaCost);
+        persistentDataContainer.set(INamespacedKeys.ITEM_ABIILTY_ACTION_TYPE,PersistentDataType.STRING,this.actionType);
+>>>>>>> 2a3b3d0... Removed unused weapon imports, Cleaned up weapons and some warnings (IntelliJ)
     }
 
     public String getName() {
@@ -377,8 +419,13 @@ public class Weapon {
         return itemStack;
     }
 
+<<<<<<< HEAD
     private List<String> parseBasicLore(List<String> lore, String weaponType, String weaponRarity, int weaponLevel,
                                         double weaponMinDamage, double weaponMaxDamage, double weaponAttackCooldown){
+=======
+
+    private List<String> parseBasicLore(List<String> lore, String weaponType, String weaponRarity, int weaponLevel, double weaponMinDamage, double weaponMaxDamage, double weaponAttackCooldown){
+>>>>>>> 2a3b3d0... Removed unused weapon imports, Cleaned up weapons and some warnings (IntelliJ)
         List<String> newLore = new ArrayList<>();
         for (String s : lore) {
             s = s.replace("{weapon-type}", weaponType)
@@ -429,7 +476,11 @@ public class Weapon {
                 newLore.remove(Color.ify(s));
             }
 
+<<<<<<< HEAD
             if (!noScroll && s.contains("{weapon-scroll-sockets}")) {
+=======
+            if (!(noScroll && s.contains("{weapon-scroll-sockets}"))){
+>>>>>>> 2a3b3d0... Removed unused weapon imports, Cleaned up weapons and some warnings (IntelliJ)
                 newLore.remove(Color.ify(s));
                 for (int i = 0; i < scroll; i++) newLore.add(Color.ify("&7» [ Scroll Socket # " + i + " ]"));
             }
@@ -450,6 +501,7 @@ public class Weapon {
                         .replace("{weapon-ability-mana}",String.valueOf(mana));
             }
             newLore.add(Color.ify(s));
+<<<<<<< HEAD
             if (!hasability && (s.contains("Weapon Ability"))){
                 newLore.remove(newLore.indexOf(Color.ify(s)) - 1);
                 newLore.remove(Color.ify(s));
@@ -459,12 +511,16 @@ public class Weapon {
                 newLore.remove(Color.ify(s));
             }
             if (hasability && s.contains("{weapon-ability-description}")) {
+=======
+            if (!hasability && (s.contains("Weapon Ability") || s.contains("{weapon-ability-name}") || s.contains("{weapon-ability-cooldown}") || s.contains("{weapon-ability-mana}") || s.contains("{weapon-ability-description}"))) {
+>>>>>>> 2a3b3d0... Removed unused weapon imports, Cleaned up weapons and some warnings (IntelliJ)
                 newLore.remove(Color.ify(s));
                 newLore.add(Color.ify(s).replace("{weapon-ability-description}", "").replace(":", ""));
                 for (String e : abilityDescription) {
                     newLore.add(Color.ify("&f" + e));
                 }
             }
+<<<<<<< HEAD
         }
         return newLore;
     }
@@ -483,6 +539,9 @@ public class Weapon {
                 newLore.remove(Color.ify(s));
             }
             if (hasBackgroundLore && s.contains("{weapon-background-lore}")) {
+=======
+            if (hasability && s.contains("{weapon-ability-description}")) {
+>>>>>>> 2a3b3d0... Removed unused weapon imports, Cleaned up weapons and some warnings (IntelliJ)
                 newLore.remove(Color.ify(s));
                 newLore.add(Color.ify(s).replace("{weapon-background-lore}", "").replace(":", ""));
                 for (String e : backgroundLore) {
@@ -493,6 +552,7 @@ public class Weapon {
         return newLore;
     }
 
+<<<<<<< HEAD
     public Weapon removeUnusedNamespacedKeys() {
         PersistentDataContainer persistentDataContainer = meta.getPersistentDataContainer();
         PersistentDataType[] namespacedKeyDataType = INamespacedKeys.getAllItemDataType();
@@ -510,4 +570,6 @@ public class Weapon {
         return this;
     }
 
+=======
+>>>>>>> 2a3b3d0... Removed unused weapon imports, Cleaned up weapons and some warnings (IntelliJ)
 }

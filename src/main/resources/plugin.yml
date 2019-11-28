@@ -1,0 +1,11 @@
+name: IllyriaRPG
+version: ${project.version}
+main: net.prosavage.illyriarpg.IllyriaRPG
+api-version: 1.14
+authors: [KingAlterIV]
+description: An RPG core.
+
+commands:
+  weapon:
+    description: Weapon command!
+    aliases: weapons
