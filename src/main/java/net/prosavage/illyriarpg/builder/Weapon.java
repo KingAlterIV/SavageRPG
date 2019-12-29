@@ -1,6 +1,7 @@
 package net.prosavage.illyriarpg.builder;
 
 import net.prosavage.illyriarpg.IllyriaRPG;
+import net.prosavage.illyriarpg.api.files.IAbilityFiles;
 import net.prosavage.illyriarpg.api.keys.INamespacedKeys;
 import net.prosavage.illyriarpg.utils.Color;
 import net.prosavage.illyriarpg.utils.NullValues;
@@ -33,7 +34,12 @@ public class Weapon {
     private Number Number = new Number();
     private Chance Chance = new Chance();
     private Color Color = new Color();
+<<<<<<< HEAD
 >>>>>>> 2a3b3d0... Removed unused weapon imports, Cleaned up weapons and some warnings (IntelliJ)
+=======
+    private NullValues NullValues = new NullValues();
+    private IAbilityFiles IAbilityFiles = new IAbilityFiles();
+>>>>>>> 5f1ac2f... Removed ingame file editor, added in more ability things including 3 new handlers which are left click, right click, and drop item.
 
     private final ItemStack itemStack;
     private final ItemMeta meta;
@@ -48,12 +54,15 @@ public class Weapon {
     private double weaponAttackCooldown = -1;
     private int scrolls = 0;
     private int gems = 0;
+
     private String ability = "null";
-    private List<String> abilityDescription = Collections.singletonList("");
-    private String castType = "null";
-    private double manaCost = -1.0;
-    private String actionType = "null";
     private double abilityCooldown = -1;
+    private List<String> abilityDescription;
+    private double abilityMana = -1;
+    private byte isLeft = (byte) 0;
+    private byte isRight = (byte) 0;
+    private byte isDroppable = (byte) 0;
+
     private byte spawnedIn;
     private String itemCreator;
     private boolean unbreakable = true;
@@ -81,8 +90,7 @@ public class Weapon {
 
     public Weapon(ItemStack itemStack,String name,String material,String rarity,double chance,
                   List<String> backgroundLore,int level,double maximumDamage,double minimumDamage,
-                  int gem, int scroll,String abilityName,List<String> abilityDescription,String castType,
-                  double mana, double abilityCooldown) {
+                  int gem, int scroll,String abilityName) {
         this.itemStack = itemStack;
         this.meta = this.itemStack.getItemMeta();
         this.name = name;
@@ -95,11 +103,7 @@ public class Weapon {
         this.minimumDamage = minimumDamage;
         this.gems = gem;
         this.scrolls = scroll;
-        this.abilityCooldown = abilityCooldown;
         this.ability = abilityName;
-        this.abilityDescription = abilityDescription;
-        this.castType = castType;
-        this.manaCost = mana;
     }
 
     public Weapon setName(String name) {
@@ -162,33 +166,23 @@ public class Weapon {
         return this;
     }
 
-    public Weapon setAbilityCooldown(double abilityCooldown) {
-        this.abilityCooldown = abilityCooldown;
-        return this;
-    }
-
     public Weapon setAbility(String name) {
-        this.ability = name;
-        return this;
-    }
-
-    public Weapon setAbilityDescription(String description) {
-        this.abilityDescription = Arrays.asList(description.split("\\|\\|"));
-        return this;
-    }
-
-    public Weapon setAbilityCastType(String castType) {
-        this.castType = castType;
-        return this;
-    }
-
-    public Weapon setAbilityManaCost(double mana) {
-        this.manaCost = mana;
-        return this;
-    }
-
-    public Weapon setAbilityActionType(String actionType) {
-        this.actionType = actionType;
+        String abilityName = IAbilityFiles.getAbilityName(name);
+        if (abilityName != null) {
+            this.ability = IAbilityFiles.getAbilityName(name);
+            this.abilityMana = IAbilityFiles.getAbilityManaCost(name);
+            this.abilityCooldown = IAbilityFiles.getAbilityCooldown(name);
+            this.abilityDescription = IAbilityFiles.getAbilityDescription(name);
+            if (IAbilityFiles.isLeftClickAction(name)) {
+                this.isLeft = (byte) 1;
+            }
+            if (IAbilityFiles.isRightClickAction(name)) {
+                this.isRight = (byte) 1;
+            }
+            if (IAbilityFiles.isDroppableAction(name)) {
+                this.isDroppable = (byte) 1;
+            }
+        }
         return this;
     }
 
@@ -237,17 +231,6 @@ public class Weapon {
             itemLore = String.join("||", this.lore);
 >>>>>>> 2a3b3d0... Removed unused weapon imports, Cleaned up weapons and some warnings (IntelliJ)
         }
-        if (this.abilityDescription != null){
-            int a = 0;
-            for (String s : this.abilityDescription){
-                if (s.equals("   ")){
-                    a = a + 1;
-                }
-            }
-            if (a < 1) {
-                abilityDescriptionLore = String.join("||", this.abilityDescription);
-            }
-        }
         if (this.backgroundLore != null) {
             int a = 0;
             for (String s : this.backgroundLore) {
@@ -280,14 +263,16 @@ public class Weapon {
             persistentDataContainer.set(INamespacedKeys.ITEM_MINIMUM_DAMAGE, PersistentDataType.DOUBLE, this.minimumDamage);
             persistentDataContainer.set(INamespacedKeys.ITEM_SCROLL, PersistentDataType.INTEGER, this.scrolls);
             persistentDataContainer.set(INamespacedKeys.ITEM_GEM, PersistentDataType.INTEGER, this.gems);
-            persistentDataContainer.set(INamespacedKeys.ITEM_ABIILTY_COOLDOWN, PersistentDataType.DOUBLE, this.abilityCooldown);
-            persistentDataContainer.set(INamespacedKeys.ITEM_ABIILTY_NAME, PersistentDataType.STRING, this.ability);
-            if (abilityDescriptionLore != null && (!abilityDescriptionLore.equals("null"))) {
-                persistentDataContainer.set(INamespacedKeys.ITEM_ABIILTY_DESCRIPTION, PersistentDataType.STRING, abilityDescriptionLore);
+
+            if (!ability.equals("null")) {
+                persistentDataContainer.set(INamespacedKeys.ITEM_ABIILTY_NAME, PersistentDataType.STRING, this.ability);
+                persistentDataContainer.set(INamespacedKeys.ITEM_ABIILTY_COOLDOWN, PersistentDataType.DOUBLE, this.abilityCooldown);
+                persistentDataContainer.set(INamespacedKeys.ITEM_ABIILTY_MANA_COST, PersistentDataType.DOUBLE, this.abilityMana);
+                persistentDataContainer.set(INamespacedKeys.ITEM_ABIILTY_IS_LEFT_ACTION, PersistentDataType.BYTE, this.isLeft);
+                persistentDataContainer.set(INamespacedKeys.ITEM_ABIILTY_IS_RIGHT_ACTION, PersistentDataType.BYTE, this.isRight);
+                persistentDataContainer.set(INamespacedKeys.ITEM_ABIILTY_IS_DROP_ACTION, PersistentDataType.BYTE, this.isDroppable);
+                persistentDataContainer.set(INamespacedKeys.ITEM_ABIILTY_DESCRIPTION, PersistentDataType.STRING, String.join("||", this.abilityDescription));
             }
-            persistentDataContainer.set(INamespacedKeys.ITEM_ABIILTY_CAST_TYPE, PersistentDataType.STRING, this.castType);
-            persistentDataContainer.set(INamespacedKeys.ITEM_ABIILTY_MANA_COST, PersistentDataType.DOUBLE, this.manaCost);
-            persistentDataContainer.set(INamespacedKeys.ITEM_ABIILTY_ACTION_TYPE, PersistentDataType.STRING, this.actionType);
             persistentDataContainer.set(INamespacedKeys.ITEM_IS_SPAWNED_IN, PersistentDataType.BYTE, this.spawnedIn);
             persistentDataContainer.set(INamespacedKeys.CREATOR_ITEM_PLAYER, PersistentDataType.STRING, this.itemCreator);
         }
@@ -380,16 +365,8 @@ public class Weapon {
         return this.abilityDescription;
     }
 
-    public String getAbilityCastType() {
-        return this.castType;
-    }
-
     public double getAbilityManaCost() {
-        return this.manaCost;
-    }
-
-    public String getAbilityActionType() {
-        return this.actionType;
+        return this.abilityMana;
     }
 
     public boolean isSpawnedIn() {
@@ -409,7 +386,7 @@ public class Weapon {
             itemLore = parseBasicLore(itemLore, this.material, this.rarity, this.level, this.minimumDamage, this.maximumDamage, this.weaponAttackCooldown);
             itemLore = parseGemLore(itemLore, this.gems);
             itemLore = parseScrollLore(itemLore, this.scrolls);
-            itemLore = parseAbilityLore(itemLore, this.ability, this.abilityDescription, this.abilityCooldown, this.manaCost);
+            itemLore = parseAbilityLore(itemLore, this.ability, this.abilityDescription, this.abilityCooldown, this.abilityMana);
             itemLore = parseBackgroundLore(itemLore, this.backgroundLore);
             meta.setUnbreakable(this.unbreakable);
             meta.setLore(itemLore);
@@ -527,7 +504,6 @@ public class Weapon {
 
     private List<String> parseBackgroundLore(List<String> lore, List<String> backgroundLore) {
         boolean hasBackgroundLore = false;
-        IllyriaRPG.getInstance().sendConsole(backgroundLore);
         if (backgroundLore != null && !(backgroundLore.equals(Collections.singletonList("null")) || !(backgroundLore.equals(Collections.singletonList("[]"))))) {
             hasBackgroundLore = true;
         }
@@ -569,7 +545,10 @@ public class Weapon {
         }
         return this;
     }
+<<<<<<< HEAD
 
 =======
 >>>>>>> 2a3b3d0... Removed unused weapon imports, Cleaned up weapons and some warnings (IntelliJ)
+=======
+>>>>>>> 5f1ac2f... Removed ingame file editor, added in more ability things including 3 new handlers which are left click, right click, and drop item.
 }

@@ -144,16 +144,6 @@ public class IWeapon {
         return Collections.singletonList("");
     }
 
-    public String getAbilityCastType(ItemStack itemStack) {
-        if (itemStack.getType() == Material.AIR){ return null; }
-        ItemMeta meta = itemStack.getItemMeta();
-        if (meta != null) {
-            PersistentDataContainer persistentDataContainer = meta.getPersistentDataContainer();
-            return persistentDataContainer.get(INamespacedKeys.ITEM_ABIILTY_CAST_TYPE, PersistentDataType.STRING);
-        }
-        return null;
-    }
-
     public double getAbilityManaCost(ItemStack itemStack) {
         if (itemStack.getType() == Material.AIR){ return -1.0; }
         ItemMeta meta = itemStack.getItemMeta();
@@ -164,6 +154,7 @@ public class IWeapon {
         return 0.0;
     }
 
+<<<<<<< HEAD
     public String getAbilityActionType(ItemStack itemStack) {
         if (itemStack.getType() == Material.AIR){ return null; }
         ItemMeta meta = itemStack.getItemMeta();
@@ -172,5 +163,16 @@ public class IWeapon {
             return persistentDataContainer.get(INamespacedKeys.ITEM_ABIILTY_ACTION_TYPE, PersistentDataType.STRING);
         }
         return null;
+=======
+    public boolean isSpawnedIn(ItemStack itemStack) {
+        if (itemStack.getType() == Material.AIR){ return false; }
+        byte isSpawnedIn = 0;
+        ItemMeta meta = itemStack.getItemMeta();
+        if (meta != null) {
+            PersistentDataContainer persistentDataContainer = meta.getPersistentDataContainer();
+            isSpawnedIn = persistentDataContainer.get(INamespacedKeys.ITEM_IS_SPAWNED_IN, PersistentDataType.BYTE);
+        }
+        return isSpawnedIn != 0;
+>>>>>>> 5f1ac2f... Removed ingame file editor, added in more ability things including 3 new handlers which are left click, right click, and drop item.
     }
 }

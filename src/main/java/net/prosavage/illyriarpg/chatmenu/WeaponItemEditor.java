@@ -7,6 +7,7 @@ import me.tom.sparse.spigot.chat.menu.element.InputElement;
 import me.tom.sparse.spigot.chat.menu.element.TextElement;
 import net.prosavage.illyriarpg.IllyriaRPG;
 import net.prosavage.illyriarpg.api.ICreator;
+import net.prosavage.illyriarpg.api.files.IAbilityFiles;
 import net.prosavage.illyriarpg.api.keys.INamespacedKeys;
 import net.prosavage.illyriarpg.builder.Weapon;
 import net.prosavage.illyriarpg.utils.Color;
@@ -21,6 +22,11 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class WeaponItemEditor {
     private net.prosavage.illyriarpg.utils.Number Number = new Number();
     private net.prosavage.illyriarpg.utils.Color Color = new Color();
+<<<<<<< HEAD
+=======
+    private NullValues NullValues = new NullValues();
+    private IAbilityFiles IAbilityFiles = new IAbilityFiles();
+>>>>>>> 5f1ac2f... Removed ingame file editor, added in more ability things including 3 new handlers which are left click, right click, and drop item.
 
     private ButtonElement goToWeaponCreateMenu(ChatMenu menu, Player player, int x, int y, String text, int page){
         return new ButtonElement(x, y, ChatColor.GREEN + text, player1 -> {
@@ -63,6 +69,7 @@ public class WeaponItemEditor {
             chatMenu.add(goToWeaponCreateMenu(chatMenu, player, 0, 18, "«", page - 1));
         }
         if (page == 3){
+<<<<<<< HEAD
             chatMenu.add(new TextElement(0, 6, "Ability name: "));
             chatMenu.add(new TextElement(0, 8, "Ability cast-type: "));
             chatMenu.add(new TextElement(0, 10, "Ability action type: "));
@@ -73,6 +80,25 @@ public class WeaponItemEditor {
             chatMenu.add(abilityActionTypeInput(player, iCreator.getPersistentAbilityActionTypeInput()));
             chatMenu.add(abilityCooldownInput(player, "" + iCreator.getPersistentAbilityCooldownInput()));
             chatMenu.add(abilityManaCostInput(player, "" + iCreator.getPersistentAbilityManaCostInput()));
+=======
+            chatMenu.add(new TextElement(0, 10, "Gem(s): "));
+            chatMenu.add(new TextElement(0, 12, "Scroll(s): "));
+            chatMenu.add(new TextElement(0, 14, "Ability name: "));
+            chatMenu.add(abilityNameInput(player, (String) NullValues.replaceNullValues(iCreator.getPersistentAbilityNameInput())));
+            chatMenu.add(gemAmountInput(player, String.valueOf(NullValues.replaceNullValues(iCreator.getPersistentGemAmountInput()))));
+            chatMenu.add(scrollAmountInput(player, String.valueOf(NullValues.replaceNullValues(iCreator.getPersistentScrollAmountInput()))));
+            chatMenu.add(goToWeaponCreateMenu(chatMenu, player, 200, 18, "»", page + 1));
+            chatMenu.add(goToWeaponCreateMenu(chatMenu, player, 0, 18, "«", page - 1));
+        }
+        if (page == 4){
+            chatMenu.add(new TextElement(0, 2, "Lore description"));
+            chatMenu.add(new TextElement(0, 4, "Use || to for new lines i.e. a||b"));
+            chatMenu.add(itemBackgroundLoreOne(player, (String) NullValues.replaceNullValues(iCreator.getPersistentBackgroundLoreOneInput())));
+            chatMenu.add(itemBackgroundLoreTwo(player, (String) NullValues.replaceNullValues(iCreator.getPersistentBackgroundLoreTwoInput())));
+            chatMenu.add(itemBackgroundLoreThree(player, (String) NullValues.replaceNullValues(iCreator.getPersistentBackgroundLoreThreeInput())));
+            chatMenu.add(itemBackgroundLoreFour(player, (String) NullValues.replaceNullValues(iCreator.getPersistentBackgroundLoreFourInput())));
+            chatMenu.add(itemBackgroundLoreFive(player, (String) NullValues.replaceNullValues(iCreator.getPersistentBackgroundLoreFiveInput())));
+>>>>>>> 5f1ac2f... Removed ingame file editor, added in more ability things including 3 new handlers which are left click, right click, and drop item.
             chatMenu.add(goToWeaponCreateMenu(chatMenu, player, 0, 18, "«", page - 1));
         }
         chatMenu.setPauseChat(true);
@@ -99,12 +125,33 @@ public class WeaponItemEditor {
                 if (iCreator.getPersistentGemAmountInput() > 0){
                     weapon.setGems(iCreator.getPersistentGemAmountInput());
                 }
+<<<<<<< HEAD
                 if (iCreator.getPersistentAbilityNameInput() != null){
                     weapon.setAbility(iCreator.getPersistentAbilityNameInput())
                             .setAbilityCastType(iCreator.getPersistentAbilityCastTypeInput())
                             .setAbilityActionType(iCreator.getPersistentAbilityActionTypeInput())
                             .setAbilityCooldown(iCreator.getPersistentAbilityCooldownInput())
                             .setAbilityManaCost(iCreator.getPersistentAbilityManaCostInput());
+=======
+                if (!NullValues.checkForNullValues(iCreator.getPersistentAbilityNameInput())){
+                    String abilityName = IAbilityFiles.getAbilityName(iCreator.getPersistentAbilityNameInput());
+                    if (abilityName != null) {
+                        weapon.setAbility(abilityName);
+                    }
+                }
+                if (!(NullValues.checkForNullValues(iCreator.getPersistentBackgroundLoreOneInput())
+                        || NullValues.checkForNullValues(iCreator.getPersistentBackgroundLoreTwoInput())
+                        || NullValues.checkForNullValues(iCreator.getPersistentBackgroundLoreThreeInput())
+                        || NullValues.checkForNullValues(iCreator.getPersistentBackgroundLoreFourInput())
+                        || NullValues.checkForNullValues(iCreator.getPersistentBackgroundLoreFiveInput()))) {
+                    String lineOne = (String) NullValues.replaceNullValues(iCreator.getPersistentBackgroundLoreOneInput());
+                    String lineTwo = (String) NullValues.replaceNullValues(iCreator.getPersistentBackgroundLoreTwoInput());
+                    String lineThree = (String) NullValues.replaceNullValues(iCreator.getPersistentBackgroundLoreThreeInput());
+                    String lineFour = (String) NullValues.replaceNullValues(iCreator.getPersistentBackgroundLoreFourInput());
+                    String lineFive = (String) NullValues.replaceNullValues(iCreator.getPersistentBackgroundLoreFiveInput());
+                    String description = (lineOne + "||" + lineTwo + "||" + lineThree + "||" + lineFour + "||" + lineFive).replaceAll("\\|\\| \\|\\|", "");
+                    weapon.setBackgroundLore(description);
+>>>>>>> 5f1ac2f... Removed ingame file editor, added in more ability things including 3 new handlers which are left click, right click, and drop item.
                 }
                 ItemStack itemStack = weapon.build();
                 player.getInventory().addItem(itemStack);
@@ -209,20 +256,8 @@ public class WeaponItemEditor {
         return weaponAttackCooldownInput;
     }
 
-    private InputElement scrollAmountInput(Player player, String value) {
-        InputElement scrollAmountInput = new InputElement(100, 14, 100, value);
-        scrollAmountInput.value.setChangeCallback(state -> {
-            String currentValue = state.getCurrent();
-            if ((currentValue != null) && Number.isParsableAsInt(currentValue)) {
-                int currentValueInt = Integer.parseInt(currentValue);
-                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_ITEM_SCROLL_AMOUNT, PersistentDataType.INTEGER, currentValueInt);
-            }
-        });
-        return scrollAmountInput;
-    }
-
     private InputElement gemAmountInput(Player player, String value) {
-        InputElement gemAmountInput = new InputElement(100, 16, 100, value);
+        InputElement gemAmountInput = new InputElement(100, 10, 100, value);
         gemAmountInput.value.setChangeCallback(state -> {
             String currentValue = state.getCurrent();
             if ((currentValue != null) && Number.isParsableAsInt(currentValue)) {
@@ -233,8 +268,26 @@ public class WeaponItemEditor {
         return gemAmountInput;
     }
 
+<<<<<<< HEAD
+    private InputElement gemAmountInput(Player player, String value) {
+        InputElement gemAmountInput = new InputElement(100, 16, 100, value);
+        gemAmountInput.value.setChangeCallback(state -> {
+=======
+    private InputElement scrollAmountInput(Player player, String value) {
+        InputElement scrollAmountInput = new InputElement(100, 12, 100, value);
+        scrollAmountInput.value.setChangeCallback(state -> {
+>>>>>>> 5f1ac2f... Removed ingame file editor, added in more ability things including 3 new handlers which are left click, right click, and drop item.
+            String currentValue = state.getCurrent();
+            if ((currentValue != null) && Number.isParsableAsInt(currentValue)) {
+                int currentValueInt = Integer.parseInt(currentValue);
+                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_ITEM_SCROLL_AMOUNT, PersistentDataType.INTEGER, currentValueInt);
+            }
+        });
+        return scrollAmountInput;
+    }
+
     private InputElement abilityNameInput(Player player, String value) {
-        InputElement abilityNameInput = new InputElement(100, 6, 100, value);
+        InputElement abilityNameInput = new InputElement(100, 14, 100, value);
         abilityNameInput.value.setChangeCallback(state -> {
             String currentValue = state.getCurrent();
             if (currentValue != null) {
@@ -244,6 +297,7 @@ public class WeaponItemEditor {
         return abilityNameInput;
     }
 
+<<<<<<< HEAD
     private InputElement abilityCastTypeInput(Player player, String value) {
         InputElement abilityCastTypeInput = new InputElement(100, 8, 100, value);
         abilityCastTypeInput.value.setChangeCallback(state -> {
@@ -286,6 +340,61 @@ public class WeaponItemEditor {
             }
         });
         return abilityManaCostInput;
+=======
+    private InputElement itemBackgroundLoreOne(Player player, String value) {
+        InputElement itemBackgroundLoreOneInput = new InputElement(0, 6, 250, value);
+        itemBackgroundLoreOneInput.value.setChangeCallback(state -> {
+            String currentValue = state.getCurrent();
+            if (currentValue != null) {
+                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_ITEM_BACKGROUND_LORE_1, PersistentDataType.STRING, currentValue);
+            }
+        });
+        return itemBackgroundLoreOneInput;
+    }
+
+    private InputElement itemBackgroundLoreTwo(Player player, String value) {
+        InputElement itemBackgroundLoreTwoInput = new InputElement(0, 8, 250, value);
+        itemBackgroundLoreTwoInput.value.setChangeCallback(state -> {
+            String currentValue = state.getCurrent();
+            if (currentValue != null) {
+                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_ITEM_BACKGROUND_LORE_2, PersistentDataType.STRING, currentValue);
+            }
+        });
+        return itemBackgroundLoreTwoInput;
+    }
+
+    private InputElement itemBackgroundLoreThree(Player player, String value) {
+        InputElement itemBackgroundLoreThreeInput = new InputElement(0, 10, 250, value);
+        itemBackgroundLoreThreeInput.value.setChangeCallback(state -> {
+            String currentValue = state.getCurrent();
+            if (currentValue != null) {
+                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_ITEM_BACKGROUND_LORE_3, PersistentDataType.STRING, currentValue);
+            }
+        });
+        return itemBackgroundLoreThreeInput;
+    }
+
+    private InputElement itemBackgroundLoreFour(Player player, String value) {
+        InputElement itemBackgroundLoreFourInput = new InputElement(0, 12, 250, value);
+        itemBackgroundLoreFourInput.value.setChangeCallback(state -> {
+            String currentValue = state.getCurrent();
+            if (currentValue != null) {
+                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_ITEM_BACKGROUND_LORE_4, PersistentDataType.STRING, currentValue);
+            }
+        });
+        return itemBackgroundLoreFourInput;
+    }
+
+    private InputElement itemBackgroundLoreFive(Player player, String value) {
+        InputElement itemBackgroundLoreFiveInput = new InputElement(0, 14, 250, value);
+        itemBackgroundLoreFiveInput.value.setChangeCallback(state -> {
+            String currentValue = state.getCurrent();
+            if (currentValue != null) {
+                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_ITEM_BACKGROUND_LORE_5, PersistentDataType.STRING, currentValue);
+            }
+        });
+        return itemBackgroundLoreFiveInput;
+>>>>>>> 5f1ac2f... Removed ingame file editor, added in more ability things including 3 new handlers which are left click, right click, and drop item.
     }
 
 }

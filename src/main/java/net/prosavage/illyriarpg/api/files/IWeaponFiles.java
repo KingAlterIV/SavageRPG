@@ -25,13 +25,12 @@ public class IWeaponFiles {
             e.printStackTrace();
         }
         return weaponConfig;
-
     }
 
     public List<String> getRarityNames(){
         File dir = new File(IllyriaRPG.getInstance().getWeaponFolder());
         if (dir.list() == null){
-            return Collections.singletonList("null");
+            return null;
         }
         return Arrays.asList(Objects.requireNonNull(dir.list()));
     }
@@ -94,6 +93,7 @@ public class IWeaponFiles {
         return WeaponFiles.getStringList("lore");
     }
 
+<<<<<<< HEAD
     public List<String> getFileAbilityDescription(String rarity, String weaponName){
         File[] dir = getRarityWeaponFiles(rarity);
         File selectedFile = null;
@@ -107,6 +107,8 @@ public class IWeaponFiles {
         return WeaponFiles.getStringList("ability-description");
     }
 
+=======
+>>>>>>> 5f1ac2f... Removed ingame file editor, added in more ability things including 3 new handlers which are left click, right click, and drop item.
     private YamlConfiguration getWeaponYAMLConfiguration(String rarity, String weaponName){
         File[] dir = getRarityWeaponFiles(rarity);
         File selectedFile = null;
@@ -201,26 +203,6 @@ public class IWeaponFiles {
         return getStat(rarity, weaponName, "ability-name");
     }
 
-    public List<String> getAbilityDescription(String rarity, String weaponName){
-        return getList(rarity, weaponName, "ability-description");
-    }
-
-    public String getAbilityCastType(String rarity, String weaponName){
-        return getStat(rarity, weaponName, "ability-cast-type");
-    }
-
-    public String getAbilityActionType(String rarity, String weaponName){
-        return getStat(rarity, weaponName, "ability-action-type");
-    }
-
-    public double getAbilityCooldown(String rarity, String weaponName){
-        return Double.parseDouble(Objects.requireNonNull(getStat(rarity, weaponName, "ability-cooldown")));
-    }
-
-    public double getAbilityManaCost(String rarity, String weaponName){
-        return Double.parseDouble(Objects.requireNonNull(getStat(rarity, weaponName, "ability-mana-cost")));
-    }
-
     public void setAttackCooldown(String rarity, String weaponName, double value){
         YamlConfiguration weaponYAML = getWeaponYAMLConfiguration(rarity, weaponName);
         weaponYAML.set("attack-cooldown", value);
@@ -311,7 +293,7 @@ public class IWeaponFiles {
         }
     }
 
-    public void setAbility(String rarity, String weaponName, String value){
+    public void setAbilityName(String rarity, String weaponName, String value){
         YamlConfiguration weaponYAML = getWeaponYAMLConfiguration(rarity, weaponName);
         weaponYAML.set("ability-name", value);
         try {
@@ -321,6 +303,7 @@ public class IWeaponFiles {
         }
     }
 
+<<<<<<< HEAD
     public void setAbilityDescription(String rarity, String weaponName, List<String> value){
         YamlConfiguration weaponYAML = getWeaponYAMLConfiguration(rarity, weaponName);
         weaponYAML.set("ability-description", value);
@@ -371,4 +354,6 @@ public class IWeaponFiles {
             e.printStackTrace();
         }
     }
+=======
+>>>>>>> 5f1ac2f... Removed ingame file editor, added in more ability things including 3 new handlers which are left click, right click, and drop item.
 }
