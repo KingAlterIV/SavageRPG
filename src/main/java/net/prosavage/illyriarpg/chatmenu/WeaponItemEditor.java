@@ -48,12 +48,23 @@ public class WeaponItemEditor {
         chatMenu.add(new TextElement(0, 16, "Give item? "));
         chatMenu.add(giveItem(player));
         if (page <= 1) {
+<<<<<<< HEAD
             chatMenu.add(new TextElement(0, 10, "Weapon name: "));
             chatMenu.add(new TextElement(0, 12, "Item rarity: "));
             chatMenu.add(new TextElement(0, 14, "Actual item type: "));
             chatMenu.add(weaponFileNameInput(player, Color.ify(iCreator.getPersistentFileName())));
             chatMenu.add(weaponRarityInput(player, iCreator.getPersistentRarityName()));
             chatMenu.add(weaponMaterialTypeInput(player, iCreator.getPersistentMaterialType()));
+=======
+            chatMenu.add(new TextElement(0, 8, "Weapon name: "));
+            chatMenu.add(new TextElement(0, 10, "Item rarity: "));
+            chatMenu.add(new TextElement(0, 12, "Actual item type: "));
+            chatMenu.add(new TextElement(0, 14, "Display item type: "));
+            chatMenu.add(weaponFileNameInput(player, Color.ify((String) NullValues.replaceNullValues(iCreator.getPersistentWeaponFileName()))));
+            chatMenu.add(weaponRarityInput(player, (String) NullValues.replaceNullValues(iCreator.getPersistentWeaponRarityName())));
+            chatMenu.add(weaponMaterialTypeInput(player, (String) NullValues.replaceNullValues(iCreator.getPersistentWeaponMaterialType())));
+            chatMenu.add(weaponDisplayMaterialTypeInput(player, (String) NullValues.replaceNullValues(iCreator.getPersistentWeaponBackgroundMaterialType())));
+>>>>>>> 9bc3217... Finished armor creation and cleaned up more things
             chatMenu.add(goToWeaponCreateMenu(chatMenu, player, 200, 18, "»", page + 1));
         }
         if (page == 2){
@@ -61,10 +72,17 @@ public class WeaponItemEditor {
             chatMenu.add(new TextElement(0, 10, "Minimum damage: "));
             chatMenu.add(new TextElement(0, 12, "Maximum damage: "));
             chatMenu.add(new TextElement(0, 14, "Cooldown: "));
+<<<<<<< HEAD
             chatMenu.add(weaponLevelInput(player, String.valueOf(iCreator.getPersistentLevelInput())));
             chatMenu.add(minimumWeaponDamageInput(player, String.valueOf(iCreator.getPersistentMinimumDamageInput())));
             chatMenu.add(maximumWeaponDamageInput(player, String.valueOf(iCreator.getPersistentMaximumDamageInput())));
             chatMenu.add(weaponAttackCooldown(player, String.valueOf(iCreator.getPersistentCooldownInput())));
+=======
+            chatMenu.add(weaponLevelInput(player, String.valueOf(NullValues.replaceNullValues(iCreator.getPersistentWeaponLevelInput()))));
+            chatMenu.add(minimumWeaponDamageInput(player, String.valueOf(NullValues.replaceNullValues(iCreator.getPersistentWeaponMinimumDamageInput()))));
+            chatMenu.add(maximumWeaponDamageInput(player, String.valueOf(NullValues.replaceNullValues(iCreator.getPersistentWeaponMaximumDamageInput()))));
+            chatMenu.add(weaponAttackCooldown(player, String.valueOf(NullValues.replaceNullValues(iCreator.getPersistentWeaponCooldownInput()))));
+>>>>>>> 9bc3217... Finished armor creation and cleaned up more things
             chatMenu.add(goToWeaponCreateMenu(chatMenu, player, 200, 18, "»", page + 1));
             chatMenu.add(goToWeaponCreateMenu(chatMenu, player, 0, 18, "«", page - 1));
         }
@@ -84,21 +102,29 @@ public class WeaponItemEditor {
             chatMenu.add(new TextElement(0, 10, "Gem(s): "));
             chatMenu.add(new TextElement(0, 12, "Scroll(s): "));
             chatMenu.add(new TextElement(0, 14, "Ability name: "));
-            chatMenu.add(abilityNameInput(player, (String) NullValues.replaceNullValues(iCreator.getPersistentAbilityNameInput())));
-            chatMenu.add(gemAmountInput(player, String.valueOf(NullValues.replaceNullValues(iCreator.getPersistentGemAmountInput()))));
-            chatMenu.add(scrollAmountInput(player, String.valueOf(NullValues.replaceNullValues(iCreator.getPersistentScrollAmountInput()))));
+            chatMenu.add(abilityNameInput(player, (String) NullValues.replaceNullValues(iCreator.getPersistentWeaponAbilityNameInput())));
+            chatMenu.add(gemAmountInput(player, String.valueOf(NullValues.replaceNullValues(iCreator.getPersistentWeaponGemAmountInput()))));
+            chatMenu.add(scrollAmountInput(player, String.valueOf(NullValues.replaceNullValues(iCreator.getPersistentWeaponScrollAmountInput()))));
             chatMenu.add(goToWeaponCreateMenu(chatMenu, player, 200, 18, "»", page + 1));
             chatMenu.add(goToWeaponCreateMenu(chatMenu, player, 0, 18, "«", page - 1));
         }
         if (page == 4){
             chatMenu.add(new TextElement(0, 2, "Lore description"));
             chatMenu.add(new TextElement(0, 4, "Use || to for new lines i.e. a||b"));
+<<<<<<< HEAD
             chatMenu.add(itemBackgroundLoreOne(player, (String) NullValues.replaceNullValues(iCreator.getPersistentBackgroundLoreOneInput())));
             chatMenu.add(itemBackgroundLoreTwo(player, (String) NullValues.replaceNullValues(iCreator.getPersistentBackgroundLoreTwoInput())));
             chatMenu.add(itemBackgroundLoreThree(player, (String) NullValues.replaceNullValues(iCreator.getPersistentBackgroundLoreThreeInput())));
             chatMenu.add(itemBackgroundLoreFour(player, (String) NullValues.replaceNullValues(iCreator.getPersistentBackgroundLoreFourInput())));
             chatMenu.add(itemBackgroundLoreFive(player, (String) NullValues.replaceNullValues(iCreator.getPersistentBackgroundLoreFiveInput())));
 >>>>>>> 5f1ac2f... Removed ingame file editor, added in more ability things including 3 new handlers which are left click, right click, and drop item.
+=======
+            chatMenu.add(itemBackgroundLoreOne(player, (String) NullValues.replaceNullValues(iCreator.getPersistentWeaponBackgroundLoreOneInput())));
+            chatMenu.add(itemBackgroundLoreTwo(player, (String) NullValues.replaceNullValues(iCreator.getPersistentWeaponBackgroundLoreTwoInput())));
+            chatMenu.add(itemBackgroundLoreThree(player, (String) NullValues.replaceNullValues(iCreator.getPersistentWeaponBackgroundLoreThreeInput())));
+            chatMenu.add(itemBackgroundLoreFour(player, (String) NullValues.replaceNullValues(iCreator.getPersistentWeaponBackgroundLoreFourInput())));
+            chatMenu.add(itemBackgroundLoreFive(player, (String) NullValues.replaceNullValues(iCreator.getPersistentWeaponBackgroundLoreFiveInput())));
+>>>>>>> 9bc3217... Finished armor creation and cleaned up more things
             chatMenu.add(goToWeaponCreateMenu(chatMenu, player, 0, 18, "«", page - 1));
         }
         chatMenu.setPauseChat(true);
@@ -109,6 +135,7 @@ public class WeaponItemEditor {
         return new ButtonElement(100, 18, ChatColor.RED + "[Close]", player1 -> {
             menu.setPauseChat(false);
             menu.close(player);
+<<<<<<< HEAD
             ICreator iCreator = new ICreator(player, false);
             if (iCreator.getPersistentGiveItem() == (byte) 1){
                 Weapon weapon = new Weapon(new ItemStack(Material.valueOf(iCreator.getPersistentMaterialType())))
@@ -121,10 +148,26 @@ public class WeaponItemEditor {
                         .setAttackCooldown(iCreator.getPersistentCooldownInput());
                 if (iCreator.getPersistentScrollAmountInput() > 0){
                     weapon.setScrolls(iCreator.getPersistentScrollAmountInput());
+=======
+            player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_WEAPON_PLAYER, PersistentDataType.STRING, player.getUniqueId().toString());
+            ICreator iCreator = new ICreator(player);
+            if (iCreator.getPersistentWeaponGiveItem() == (byte) 1){
+                Weapon weapon = new Weapon(new ItemStack(Material.valueOf(iCreator.getPersistentWeaponMaterialType())))
+                        .setName(Color.ify(iCreator.getPersistentWeaponFileName()))
+                        .setRarity(iCreator.getPersistentWeaponRarityName())
+                        .setLevel(iCreator.getPersistentWeaponLevelInput())
+                        .setMaterial(iCreator.getPersistentWeaponBackgroundMaterialType())
+                        .setMinimumDamage(iCreator.getPersistentWeaponMinimumDamageInput())
+                        .setMaximumDamage(iCreator.getPersistentWeaponMaximumDamageInput())
+                        .setAttackCooldown(iCreator.getPersistentWeaponCooldownInput());
+                if (iCreator.getPersistentWeaponScrollAmountInput() > 0){
+                    weapon.setScrolls(iCreator.getPersistentWeaponScrollAmountInput());
+>>>>>>> 9bc3217... Finished armor creation and cleaned up more things
                 }
-                if (iCreator.getPersistentGemAmountInput() > 0){
-                    weapon.setGems(iCreator.getPersistentGemAmountInput());
+                if (iCreator.getPersistentWeaponGemAmountInput() > 0){
+                    weapon.setGems(iCreator.getPersistentWeaponGemAmountInput());
                 }
+<<<<<<< HEAD
 <<<<<<< HEAD
                 if (iCreator.getPersistentAbilityNameInput() != null){
                     weapon.setAbility(iCreator.getPersistentAbilityNameInput())
@@ -135,27 +178,31 @@ public class WeaponItemEditor {
 =======
                 if (!NullValues.checkForNullValues(iCreator.getPersistentAbilityNameInput())){
                     String abilityName = IAbilityFiles.getAbilityName(iCreator.getPersistentAbilityNameInput());
+=======
+                if (!NullValues.checkForNullValues(iCreator.getPersistentWeaponAbilityNameInput())){
+                    String abilityName = IAbilityFiles.getAbilityName(iCreator.getPersistentWeaponAbilityNameInput());
+>>>>>>> 9bc3217... Finished armor creation and cleaned up more things
                     if (abilityName != null) {
                         weapon.setAbility(abilityName);
                     }
                 }
-                if (!(NullValues.checkForNullValues(iCreator.getPersistentBackgroundLoreOneInput())
-                        || NullValues.checkForNullValues(iCreator.getPersistentBackgroundLoreTwoInput())
-                        || NullValues.checkForNullValues(iCreator.getPersistentBackgroundLoreThreeInput())
-                        || NullValues.checkForNullValues(iCreator.getPersistentBackgroundLoreFourInput())
-                        || NullValues.checkForNullValues(iCreator.getPersistentBackgroundLoreFiveInput()))) {
-                    String lineOne = (String) NullValues.replaceNullValues(iCreator.getPersistentBackgroundLoreOneInput());
-                    String lineTwo = (String) NullValues.replaceNullValues(iCreator.getPersistentBackgroundLoreTwoInput());
-                    String lineThree = (String) NullValues.replaceNullValues(iCreator.getPersistentBackgroundLoreThreeInput());
-                    String lineFour = (String) NullValues.replaceNullValues(iCreator.getPersistentBackgroundLoreFourInput());
-                    String lineFive = (String) NullValues.replaceNullValues(iCreator.getPersistentBackgroundLoreFiveInput());
+                if (!(NullValues.checkForNullValues(iCreator.getPersistentWeaponBackgroundLoreOneInput())
+                        || NullValues.checkForNullValues(iCreator.getPersistentWeaponBackgroundLoreTwoInput())
+                        || NullValues.checkForNullValues(iCreator.getPersistentWeaponBackgroundLoreThreeInput())
+                        || NullValues.checkForNullValues(iCreator.getPersistentWeaponBackgroundLoreFourInput())
+                        || NullValues.checkForNullValues(iCreator.getPersistentWeaponBackgroundLoreFiveInput()))) {
+                    String lineOne = (String) NullValues.replaceNullValues(iCreator.getPersistentWeaponBackgroundLoreOneInput());
+                    String lineTwo = (String) NullValues.replaceNullValues(iCreator.getPersistentWeaponBackgroundLoreTwoInput());
+                    String lineThree = (String) NullValues.replaceNullValues(iCreator.getPersistentWeaponBackgroundLoreThreeInput());
+                    String lineFour = (String) NullValues.replaceNullValues(iCreator.getPersistentWeaponBackgroundLoreFourInput());
+                    String lineFive = (String) NullValues.replaceNullValues(iCreator.getPersistentWeaponBackgroundLoreFiveInput());
                     String description = (lineOne + "||" + lineTwo + "||" + lineThree + "||" + lineFour + "||" + lineFive).replaceAll("\\|\\| \\|\\|", "");
                     weapon.setBackgroundLore(description);
 >>>>>>> 5f1ac2f... Removed ingame file editor, added in more ability things including 3 new handlers which are left click, right click, and drop item.
                 }
                 ItemStack itemStack = weapon.build();
                 player.getInventory().addItem(itemStack);
-                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_ITEM_GIVE_ITEM, PersistentDataType.BYTE, (byte)0);
+                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_WEAPON_GIVE_ITEM, PersistentDataType.BYTE, (byte)0);
             }
             for (int i = 0; i < 200; i++){
                 player.sendMessage("\n");
@@ -171,39 +218,59 @@ public class WeaponItemEditor {
             if (currentValue == Boolean.TRUE) {
                 byteValue = 1;
             }
-            player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_ITEM_GIVE_ITEM, PersistentDataType.BYTE, byteValue);
+            player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_WEAPON_GIVE_ITEM, PersistentDataType.BYTE, byteValue);
         });
         return weaponGiveItemInput;
     }
 
     private InputElement weaponFileNameInput(Player player, String value) {
+<<<<<<< HEAD
         InputElement weaponFile = new InputElement(100, 10, 100, value);
+=======
+        InputElement weaponFile = new InputElement(100, 8, 200, value);
+>>>>>>> 9bc3217... Finished armor creation and cleaned up more things
         weaponFile.value.setChangeCallback(state -> {
             String currentValue = state.getCurrent();
             if (currentValue != null) {
-                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_ITEM_WEAPON_FILE_NAME, PersistentDataType.STRING, currentValue);
+                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_WEAPON_NAME, PersistentDataType.STRING, currentValue);
             }
         });
         return weaponFile;
     }
 
     private InputElement weaponMaterialTypeInput(Player player, String value) {
-        InputElement weaponMaterialInput = new InputElement(100, 12, 100, value);
+        InputElement weaponMaterialInput = new InputElement(100, 12, 200, value);
         weaponMaterialInput.value.setChangeCallback(state -> {
             String currentValue = state.getCurrent();
             if (currentValue != null) {
-                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_ITEM_MATERIAL_TYPE, PersistentDataType.STRING, currentValue);
+                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_WEAPON_MATERIAL_TYPE, PersistentDataType.STRING, currentValue);
+            }
+        });
+        return weaponMaterialInput;
+    }
+
+<<<<<<< HEAD
+    private InputElement weaponRarityInput(Player player, String value) {
+        InputElement weaponRarityInput = new InputElement(100, 14, 100, value);
+=======
+    private InputElement weaponDisplayMaterialTypeInput(Player player, String value) {
+        InputElement weaponMaterialInput = new InputElement(100, 14, 200, value);
+        weaponMaterialInput.value.setChangeCallback(state -> {
+            String currentValue = state.getCurrent();
+            if (currentValue != null) {
+                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_WEAPON_BACKGROUND_MATERIAL_TYPE, PersistentDataType.STRING, currentValue);
             }
         });
         return weaponMaterialInput;
     }
 
     private InputElement weaponRarityInput(Player player, String value) {
-        InputElement weaponRarityInput = new InputElement(100, 14, 100, value);
+        InputElement weaponRarityInput = new InputElement(100, 10, 200, value);
+>>>>>>> 9bc3217... Finished armor creation and cleaned up more things
         weaponRarityInput.value.setChangeCallback(state -> {
             String currentValue = state.getCurrent();
             if (currentValue != null) {
-                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_ITEM_RARITY, PersistentDataType.STRING, currentValue);
+                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_WEAPON_RARITY, PersistentDataType.STRING, currentValue);
             }
         });
         return weaponRarityInput;
@@ -216,7 +283,7 @@ public class WeaponItemEditor {
             String currentValue = state.getCurrent();
             if ((currentValue != null) && Number.isParsableAsInt(currentValue)) {
                 int currentValueInt = Integer.parseInt(currentValue);
-                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_ITEM_LEVEL, PersistentDataType.INTEGER, currentValueInt);
+                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_WEAPON_LEVEL, PersistentDataType.INTEGER, currentValueInt);
             }
         });
         return weaponLevelInput;
@@ -227,7 +294,7 @@ public class WeaponItemEditor {
         weaponDamageInput.value.setChangeCallback(state -> {
             String currentValue = state.getCurrent();
             if (currentValue != null) {
-                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_ITEM_MINIMUM_DAMAGE, PersistentDataType.DOUBLE, Double.parseDouble(currentValue));
+                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_WEAPON_MINIMUM_DAMAGE, PersistentDataType.DOUBLE, Double.parseDouble(currentValue));
             }
         });
         return weaponDamageInput;
@@ -238,7 +305,7 @@ public class WeaponItemEditor {
         maximumWeaponDamageInput.value.setChangeCallback(state -> {
             String currentValue = state.getCurrent();
             if (currentValue != null) {
-                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_ITEM_MAXIMUM_DAMAGE, PersistentDataType.DOUBLE, Double.parseDouble(currentValue));
+                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_WEAPON_MAXIMUM_DAMAGE, PersistentDataType.DOUBLE, Double.parseDouble(currentValue));
             }
         });
         return maximumWeaponDamageInput;
@@ -250,7 +317,7 @@ public class WeaponItemEditor {
             String currentValue = state.getCurrent();
             if ((currentValue != null) && Number.isParsableAsDouble(currentValue)) {
                 double currentValueDouble = Double.parseDouble(currentValue);
-                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_ITEM_ATTACK_COOLDOWN, PersistentDataType.DOUBLE, currentValueDouble);
+                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_WEAPON_ATTACK_COOLDOWN, PersistentDataType.DOUBLE, currentValueDouble);
             }
         });
         return weaponAttackCooldownInput;
@@ -262,7 +329,7 @@ public class WeaponItemEditor {
             String currentValue = state.getCurrent();
             if ((currentValue != null) && Number.isParsableAsInt(currentValue)) {
                 int currentValueInt = Integer.parseInt(currentValue);
-                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_ITEM_GEM_AMOUNT, PersistentDataType.INTEGER, currentValueInt);
+                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_WEAPON_GEM_AMOUNT, PersistentDataType.INTEGER, currentValueInt);
             }
         });
         return gemAmountInput;
@@ -280,7 +347,7 @@ public class WeaponItemEditor {
             String currentValue = state.getCurrent();
             if ((currentValue != null) && Number.isParsableAsInt(currentValue)) {
                 int currentValueInt = Integer.parseInt(currentValue);
-                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_ITEM_SCROLL_AMOUNT, PersistentDataType.INTEGER, currentValueInt);
+                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_WEAPON_SCROLL_AMOUNT, PersistentDataType.INTEGER, currentValueInt);
             }
         });
         return scrollAmountInput;
@@ -291,7 +358,7 @@ public class WeaponItemEditor {
         abilityNameInput.value.setChangeCallback(state -> {
             String currentValue = state.getCurrent();
             if (currentValue != null) {
-                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_ITEM_ABILITY_NAME, PersistentDataType.STRING, currentValue);
+                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_WEAPON_ABILITY_NAME, PersistentDataType.STRING, currentValue);
             }
         });
         return abilityNameInput;
@@ -346,7 +413,7 @@ public class WeaponItemEditor {
         itemBackgroundLoreOneInput.value.setChangeCallback(state -> {
             String currentValue = state.getCurrent();
             if (currentValue != null) {
-                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_ITEM_BACKGROUND_LORE_1, PersistentDataType.STRING, currentValue);
+                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_WEAPON_BACKGROUND_LORE_1, PersistentDataType.STRING, currentValue);
             }
         });
         return itemBackgroundLoreOneInput;
@@ -357,7 +424,7 @@ public class WeaponItemEditor {
         itemBackgroundLoreTwoInput.value.setChangeCallback(state -> {
             String currentValue = state.getCurrent();
             if (currentValue != null) {
-                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_ITEM_BACKGROUND_LORE_2, PersistentDataType.STRING, currentValue);
+                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_WEAPON_BACKGROUND_LORE_2, PersistentDataType.STRING, currentValue);
             }
         });
         return itemBackgroundLoreTwoInput;
@@ -368,7 +435,7 @@ public class WeaponItemEditor {
         itemBackgroundLoreThreeInput.value.setChangeCallback(state -> {
             String currentValue = state.getCurrent();
             if (currentValue != null) {
-                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_ITEM_BACKGROUND_LORE_3, PersistentDataType.STRING, currentValue);
+                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_WEAPON_BACKGROUND_LORE_3, PersistentDataType.STRING, currentValue);
             }
         });
         return itemBackgroundLoreThreeInput;
@@ -379,7 +446,7 @@ public class WeaponItemEditor {
         itemBackgroundLoreFourInput.value.setChangeCallback(state -> {
             String currentValue = state.getCurrent();
             if (currentValue != null) {
-                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_ITEM_BACKGROUND_LORE_4, PersistentDataType.STRING, currentValue);
+                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_WEAPON_BACKGROUND_LORE_4, PersistentDataType.STRING, currentValue);
             }
         });
         return itemBackgroundLoreFourInput;
@@ -390,7 +457,7 @@ public class WeaponItemEditor {
         itemBackgroundLoreFiveInput.value.setChangeCallback(state -> {
             String currentValue = state.getCurrent();
             if (currentValue != null) {
-                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_ITEM_BACKGROUND_LORE_5, PersistentDataType.STRING, currentValue);
+                player.getPersistentDataContainer().set(INamespacedKeys.CREATOR_WEAPON_BACKGROUND_LORE_5, PersistentDataType.STRING, currentValue);
             }
         });
         return itemBackgroundLoreFiveInput;
