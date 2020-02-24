@@ -1,9 +1,16 @@
-name: IllyriaRPG
+name: SavageRPG
 version: ${project.version}
-main: net.prosavage.illyriarpg.IllyriaRPG
+main: net.prosavage.savagerpg.SavageRPG
 api-version: 1.14
 authors: [KingAlterIV]
 description: An RPG core.
+<<<<<<< HEAD
+=======
+depend:
+  - ChatMenuAPI
+softdepend:
+  - WorldGuard
+>>>>>>> 71fac37... Renamed things back, new & better files manager, more stuff fixed.
 
 commands:
   weapon:
@@ -12,3 +19,6 @@ commands:
   armor:
     description: Armor command!
     aliases: armors
+  entity:
+    description: Entity command!
+    aliases: entities

@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.prosavage</groupId>
-    <artifactId>IllyriaRPG</artifactId>
+    <artifactId>SavageRPG</artifactId>
     <version>0.1.5b</version>
     <packaging>jar</packaging>
 
-    <name>IllyriaRPG - ${project.version}</name>
+    <name>SavageRPG - ${project.version}</name>
 
     <description>An RPG core</description>
     <properties>
@@ -59,6 +59,14 @@
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
+        <repository>
+            <id>sk89q-repo</id>
+            <url>https://maven.enginehub.org/repo/</url>
+        </repository>
+        <repository>
+            <id>dmulloy2-repo</id>
+            <url>https://repo.dmulloy2.net/nexus/repository/public/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -76,6 +84,12 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.udojava</groupId>
+            <artifactId>EvalEx</artifactId>
+            <version>2.1</version>
+        </dependency>
+
         <!-- These must be locally installed! -->
 
         <dependency>
@@ -85,6 +99,13 @@
             <scope>system</scope>
             <systemPath>${pom.basedir}\libs\ChatMenuAPI.jar</systemPath>
             <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sk89q.worldguard</groupId>
+            <artifactId>worldguard-bukkit</artifactId>
+            <version>7.0.1</version>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>
