@@ -1,11 +1,15 @@
-name: SavageRPG
+name: YaRPG
 version: ${project.version}
-main: net.prosavage.savagerpg.SavageRPG
+main: net.prosavage.yarpg.YaRPG
 api-version: 1.14
 authors: [KingAlterIV]
+<<<<<<< HEAD
 description: An RPG core.
 <<<<<<< HEAD
 =======
+=======
+description: Yet Another RPG Core... but this one is customizable and free!
+>>>>>>> 44737fc... Renamed things to YaRPG, added in new commands, fixed formatting, file count fixed, etc. / 12:00:11.62 - Sat 04/04/2020
 depend:
   - ChatMenuAPI
 softdepend:
@@ -14,11 +18,14 @@ softdepend:
 
 commands:
   weapon:
-    description: Weapon command!
+    description: The main weapon command of the plugin.
     aliases: weapons
   armor:
-    description: Armor command!
+    description: The main armor command of the plugin.
     aliases: armors
   entity:
-    description: Entity command!
+    description: The main basic entity command of the plugin.
     aliases: entities
+  yarpg:
+    description: The main command of the plugin.
+    aliases: rpg
