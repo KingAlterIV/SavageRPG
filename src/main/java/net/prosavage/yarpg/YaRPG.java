@@ -1,10 +1,19 @@
 package net.prosavage.yarpg;
 
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.events.PacketAdapter;
+import com.comphenix.protocol.events.PacketEvent;
+import com.comphenix.protocol.wrappers.EnumWrappers;
+import net.prosavage.yarpg.libs.me.tom.sparse.spigot.chat.menu.ChatMenuAPI;
+import net.prosavage.yarpg.libs.me.tom.sparse.spigot.chat.menu.element.Element;
 import net.prosavage.yarpg.api.YFiles;
 import net.prosavage.yarpg.commands.ArmorCommand;
 import net.prosavage.yarpg.commands.EntityCommand;
 import net.prosavage.yarpg.commands.WeaponCommand;
 import net.prosavage.yarpg.commands.YaRPGCommand;
+import net.prosavage.yarpg.events.EntitySpawnListener;
+import net.prosavage.yarpg.events.PlayerJoinListener;
 import net.prosavage.yarpg.utils.Color;
 import net.prosavage.yarpg.utils.handlers.abilities.DropAction;
 import net.prosavage.yarpg.utils.handlers.abilities.LeftAndRightAction;
@@ -14,8 +23,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import java.io.File;
-import java.util.HashMap;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Consumer;
 
 public final class YaRPG extends JavaPlugin {
@@ -27,6 +35,7 @@ public final class YaRPG extends JavaPlugin {
     private String abilityFolder = getDataFolder() + "\\abilities";
     private String entityFolder = getDataFolder() + "\\entities";
     private File configFile = new File(getDataFolder(), "config.yml");
+    private Map<UUID, List<Element>> elementList = new HashMap<>();
 
     private YFiles YFiles = new YFiles();
 
@@ -44,6 +53,7 @@ public final class YaRPG extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        ChatMenuAPI.init(this);
         if (!configFile.exists()) {
             saveDefaultConfig();
         }
@@ -69,6 +79,8 @@ public final class YaRPG extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("entity")).setExecutor(new EntityCommand());
         Bukkit.getPluginManager().registerEvents(new LeftAndRightAction(), this);
         Bukkit.getPluginManager().registerEvents(new DropAction(), this);
+        Bukkit.getPluginManager().registerEvents(new EntitySpawnListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
         new BukkitRunnable(){
             @Override
             public void run() {
@@ -85,6 +97,7 @@ public final class YaRPG extends JavaPlugin {
     @Override
     public void onDisable() {
         YFiles.removeAbilityFiles();
+        ChatMenuAPI.disable();
     }
 
     public void sendConsole(Object object){
@@ -117,6 +130,10 @@ public final class YaRPG extends JavaPlugin {
 
     public HashMap<String, Consumer<PlayerDropItemEvent>> getItemDropInteractions() {
         return itemDropInteractions;
+    }
+
+    public Map<UUID, List<Element>> getElementList(){
+        return this.elementList;
     }
 
 }

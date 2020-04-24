@@ -69,77 +69,77 @@ public class ArmorFiles {
     }
 
     public ArmorFiles setActualMaterial(String actualMaterial) {
-        this.getArmorConfiguration().set("armorActualMaterial", actualMaterial);
+        this.getArmorConfiguration().set("armor_actual_material", actualMaterial);
         return this;
     }
 
     public ArmorFiles setCosmeticMaterial(String cosmeticMaterial) {
-        this.getArmorConfiguration().set("armorCosmeticMaterial", cosmeticMaterial);
+        this.getArmorConfiguration().set("armor_cosmetic_material", cosmeticMaterial);
         return this;
     }
 
     public ArmorFiles setBackgroundLore(List<String> backgroundLore) {
-        this.getArmorConfiguration().set("armorBackgroundLore", backgroundLore);
+        this.getArmorConfiguration().set("armor_background_lore", backgroundLore);
         return this;
     }
 
     public ArmorFiles setMinimumLevel(int minimumLevel) {
-        this.getArmorConfiguration().set("armorMinimumLevel", minimumLevel);
+        this.getArmorConfiguration().set("armor_minimum_level", minimumLevel);
         return this;
     }
 
     public ArmorFiles setMaximumLevel(int maximumLevel) {
-        this.getArmorConfiguration().set("armorMaximumLevel", maximumLevel);
+        this.getArmorConfiguration().set("armor_maximum_level", maximumLevel);
         return this;
     }
 
     public ArmorFiles setMinimumProtection(double minimumProtection) {
-        this.getArmorConfiguration().set("armorMinimumProtection", minimumProtection);
+        this.getArmorConfiguration().set("armor_minimum_protection", minimumProtection);
         return this;
     }
 
     public ArmorFiles setMaximumProtection(double maximumProtection) {
-        this.getArmorConfiguration().set("armorMaximumProtection", maximumProtection);
+        this.getArmorConfiguration().set("armor_maximum_protection", maximumProtection);
         return this;
     }
 
     public ArmorFiles setMinimumHealth(double minimumHealth) {
-        this.getArmorConfiguration().set("armorMinimumProtection", minimumHealth);
+        this.getArmorConfiguration().set("armor_minimum_protection", minimumHealth);
         return this;
     }
 
     public ArmorFiles setMaximumHealth(double maximumHealth) {
-        this.getArmorConfiguration().set("armorMaximumHealth", maximumHealth);
+        this.getArmorConfiguration().set("armor_maximum_health", maximumHealth);
         return this;
     }
 
     public ArmorFiles setMinimumRegen(double minimumRegen) {
-        this.getArmorConfiguration().set("armorMinimumRegen", minimumRegen);
+        this.getArmorConfiguration().set("armor_minimum_regen", minimumRegen);
         return this;
     }
 
     public ArmorFiles setMaximumRegen(double maximumRegen) {
-        this.getArmorConfiguration().set("armorMaximumRegen", maximumRegen);
+        this.getArmorConfiguration().set("armor_maximum_regen", maximumRegen);
         return this;
     }
 
     public ArmorFiles setMinimumGem(int minimumGem) {
-        this.getArmorConfiguration().set("armorMinimumGem", minimumGem);
+        this.getArmorConfiguration().set("armor_minimum_gem", minimumGem);
         return this;
     }
 
     public ArmorFiles setMaximumGem(int maximumGem) {
-        this.getArmorConfiguration().set("armorMaximumGem", maximumGem);
+        this.getArmorConfiguration().set("armor_maximum_gem", maximumGem);
         return this;
     }
 
     public ArmorFiles setMinimumScroll(int minimumScroll) {
-        this.getArmorConfiguration().set("armorMinimumScroll", minimumScroll);
+        this.getArmorConfiguration().set("armor_minimum_scroll", minimumScroll);
         return this;
     }
 
     public ArmorFiles setMaximumScroll(int maximumScroll) {
-        this.getArmorConfiguration().set("armorMaximumScroll", maximumScroll);
+        this.getArmorConfiguration().set("armor_maximum_scroll", maximumScroll);
         return this;
     }
 
@@ -160,63 +160,63 @@ public class ArmorFiles {
     }
 
     public String getActualMaterial() {
-        return this.getArmorConfiguration().getString("armorActualMaterial");
+        return this.getArmorConfiguration().getString("armor_actual_material");
     }
 
     public String getCosmeticMaterial() {
-        return this.getArmorConfiguration().getString("armorCosmeticMaterial");
+        return this.getArmorConfiguration().getString("armor_cosmetic_material");
     }
 
     public List<String> getBackgroundLore() {
-        return this.getArmorConfiguration().getStringList("armorBackgroundLore");
+        return this.getArmorConfiguration().getStringList("armor_background_lore");
     }
 
     public int getMinimumLevel() {
-        return this.getArmorConfiguration().getInt("armorMinimumLevel");
+        return this.getArmorConfiguration().getInt("armor_minimum_level");
     }
 
     public double getMaximumLevel() {
-        return this.getArmorConfiguration().getInt("armorMaximumLevel");
+        return this.getArmorConfiguration().getInt("armor_maximum_level");
     }
 
     public double getMinimumProtection() {
-        return this.getArmorConfiguration().getDouble("armorMinimumProtection");
+        return this.getArmorConfiguration().getDouble("armor_minimum_protection");
     }
 
     public double getMaximumProtection() {
-        return this.getArmorConfiguration().getDouble("armorMaximumProtection");
+        return this.getArmorConfiguration().getDouble("armor_maximum_protection");
     }
 
     public double getMinimumHealth() {
-        return this.getArmorConfiguration().getDouble("armorMinimumProtection");
+        return this.getArmorConfiguration().getDouble("armor_minimum_health");
     }
 
     public double getMaximumHealth() {
-        return this.getArmorConfiguration().getDouble("armorMaximumHealth");
+        return this.getArmorConfiguration().getDouble("armor_maximum_health");
     }
 
     public double getMinimumRegen() {
-        return this.getArmorConfiguration().getDouble("armorMinimumRegen");
+        return this.getArmorConfiguration().getDouble("armor_minimum_regen");
     }
 
     public double getMaximumRegen() {
-        return this.getArmorConfiguration().getDouble("armorMaximumRegen");
+        return this.getArmorConfiguration().getDouble("armor_maximum_regen");
     }
 
     public int getMinimumGem() {
-        return this.getArmorConfiguration().getInt("armorMinimumGem");
+        return this.getArmorConfiguration().getInt("armor_minimum_gem");
     }
 
     public int getMaximumGem() {
-        return this.getArmorConfiguration().getInt("armorMaximumGem");
+        return this.getArmorConfiguration().getInt("armor_maximum_gem");
     }
 
     public int getMinimumScroll() {
-        return this.getArmorConfiguration().getInt("armorMinimumScroll");
+        return this.getArmorConfiguration().getInt("armor_minimum_scroll");
     }
 
     public int getMaximumScroll() {
-        return this.getArmorConfiguration().getInt("armorMaximumScroll");
+        return this.getArmorConfiguration().getInt("armor_maximum_scroll");
     }
 
     public File[] getRarityFolders() {

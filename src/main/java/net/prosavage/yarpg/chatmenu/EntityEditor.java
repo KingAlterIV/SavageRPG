@@ -1,20 +1,20 @@
 package net.prosavage.yarpg.chatmenu;
 
-import me.tom.sparse.spigot.chat.menu.ChatMenu;
-import me.tom.sparse.spigot.chat.menu.element.BooleanElement;
-import me.tom.sparse.spigot.chat.menu.element.ButtonElement;
-import me.tom.sparse.spigot.chat.menu.element.InputElement;
-import me.tom.sparse.spigot.chat.menu.element.TextElement;
+import net.prosavage.yarpg.libs.me.tom.sparse.spigot.chat.menu.ChatMenu;
+import net.prosavage.yarpg.libs.me.tom.sparse.spigot.chat.menu.element.BooleanElement;
+import net.prosavage.yarpg.libs.me.tom.sparse.spigot.chat.menu.element.ButtonElement;
+import net.prosavage.yarpg.libs.me.tom.sparse.spigot.chat.menu.element.InputElement;
+import net.prosavage.yarpg.libs.me.tom.sparse.spigot.chat.menu.element.TextElement;
 import net.prosavage.yarpg.api.YCreator;
 import net.prosavage.yarpg.api.keys.YNamespacedKeys;
 import net.prosavage.yarpg.builders.entities.YEntities;
 import net.prosavage.yarpg.utils.Color;
 import net.prosavage.yarpg.utils.INumber;
 import net.prosavage.yarpg.utils.NullValues;
+import net.prosavage.yarpg.utils.chatmenu.MenuElements;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class EntityEditor {
 
@@ -22,81 +22,79 @@ public class EntityEditor {
     private net.prosavage.yarpg.utils.Color Color = new Color();
     private net.prosavage.yarpg.utils.NullValues NullValues = new NullValues();
 
-    private ButtonElement goToEntityCreateMenu(ChatMenu menu, Player player, int x, int y, String text, int page){
+    public void openMenu(Player player) {
+        ChatMenu menu = new ChatMenu().pauseChat();
+        menu = setMenuContent(menu, player, 1);
+        menu.openFor(player);
+    }
+
+    private ButtonElement setPageMenuContent(ChatMenu menu, Player player, int x, int y, String text, int page){
         return new ButtonElement(x, y, ChatColor.GREEN + text, player1 -> {
-            menu.setPauseChat(false);
-            menu.close(player);
-            new BukkitRunnable(){
-                @Override
-                public void run() {
-                    getEntityCreateMenu(player, page);
-                }
-            }.runTaskLater(net.prosavage.yarpg.YaRPG.getInstance(), 1L);
+            new MenuElements(player, menu).clear();
+            setMenuContent(menu, player, page);
+            menu.refresh();
         });
     }
 
-    public void getEntityCreateMenu(Player player, int page){
+    public ChatMenu setMenuContent(ChatMenu menu, Player player, int page) {
         YCreator yCreator = new YCreator(player);
-        ChatMenu chatMenu = new ChatMenu();
-        chatMenu.add(closeDefaultMenu(chatMenu, player));
-        chatMenu.add(new TextElement(0, 16, "Spawn entity? "));
-        chatMenu.add(spawnEntity(player));
+        MenuElements menuElements = new MenuElements(player, menu);
+        menu.setAutoUnregister(true);
+        menu.add(menuElements.addElement(player, closeDefaultMenu(menu, player)));
+        menu.add(menuElements.addElement(player, new TextElement(0, 16, "Spawn entity? ")));
+        menu.add(menuElements.addElement(player, spawnEntity(player)));
         if (page <= 1) {
-            chatMenu.add(new TextElement(0, 6, "Entity type: "));
-            chatMenu.add(new TextElement(0, 8, "Entity name: "));
-            chatMenu.add(new TextElement(0, 10, "Entity region: "));
-            chatMenu.add(new TextElement(0, 12, "Entity max health: "));
-            chatMenu.add(entityTypeInput(player, Color.ify((String) NullValues.replaceNullValues(yCreator.getPersistentEntityTypeInput()))));
-            chatMenu.add(entityNameInput(player, Color.ify((String) NullValues.replaceNullValues(yCreator.getPersistentEntityNameInput()))));
-            chatMenu.add(entityRegionInput(player, (String) NullValues.replaceNullValues(yCreator.getPersistentEntityRegionInput())));
-            chatMenu.add(entityHealthInput(player, String.valueOf(NullValues.replaceNullValues(yCreator.getPersistentEntityHealthInput()))));
-            chatMenu.add(goToEntityCreateMenu(chatMenu, player, 200, 18, "»", page + 1));
+            menu.add(menuElements.addElement(player, new TextElement(0, 6, "Entity type: ")));
+            menu.add(menuElements.addElement(player, new TextElement(0, 8, "Entity name: ")));
+            menu.add(menuElements.addElement(player, new TextElement(0, 10, "Entity region: ")));
+            menu.add(menuElements.addElement(player, new TextElement(0, 12, "Entity max health: ")));
+            menu.add(menuElements.addElement(player, entityTypeInput(player, Color.ify((String) NullValues.replaceNullValues(yCreator.getPersistentEntityTypeInput())))));
+            menu.add(menuElements.addElement(player, entityNameInput(player, Color.ify((String) NullValues.replaceNullValues(yCreator.getPersistentEntityNameInput())))));
+            menu.add(menuElements.addElement(player, entityRegionInput(player, (String) NullValues.replaceNullValues(yCreator.getPersistentEntityRegionInput()))));
+            menu.add(menuElements.addElement(player, entityHealthInput(player, String.valueOf(NullValues.replaceNullValues(yCreator.getPersistentEntityHealthInput())))));
+            menu.add(menuElements.addElement(player, setPageMenuContent(menu, player, 200, 18, "»", page + 1)));
         }
         if (page == 2) {
-            chatMenu.add(new TextElement(0, 0, "Level: "));
-            chatMenu.add(new TextElement(0, 2, "Minimum exp: "));
-            chatMenu.add(new TextElement(0, 4, "Maximum exp: "));
-            chatMenu.add(new TextElement(0, 6, "Minimum damage: "));
-            chatMenu.add(new TextElement(0, 8, "Maximum damage: "));
-            chatMenu.add(new TextElement(0, 10, "Minimum protection: "));
-            chatMenu.add(new TextElement(0, 12, "Maximum protection: "));
-            chatMenu.add(entityLevelInput(player, String.valueOf(NullValues.replaceNullValues(yCreator.getPersistentEntityLevelInput()))));
-            chatMenu.add(entityMinimumEXPInput(player, String.valueOf(NullValues.replaceNullValues(yCreator.getPersistentEntityMinimumEXPInput()))));
-            chatMenu.add(entityMaximumEXPInput(player, String.valueOf(NullValues.replaceNullValues(yCreator.getPersistentEntityMaximumEXPInput()))));
-            chatMenu.add(entityMinimumDamageInput(player, String.valueOf(NullValues.replaceNullValues(yCreator.getPersistentEntityMinimumDamageInput()))));
-            chatMenu.add(entityMaximumDamageInput(player, String.valueOf(NullValues.replaceNullValues(yCreator.getPersistentEntityMaximumDamageInput()))));
-            chatMenu.add(entityMinimumProtectionInput(player, String.valueOf(NullValues.replaceNullValues(yCreator.getPersistentEntityMinimumProtectionInput()))));
-            chatMenu.add(entityMaximumProtectionInput(player, String.valueOf(NullValues.replaceNullValues(yCreator.getPersistentEntityMaximumProtectionInput()))));
-            chatMenu.add(goToEntityCreateMenu(chatMenu, player, 200, 18, "»", page + 1));
-            chatMenu.add(goToEntityCreateMenu(chatMenu, player, 0, 18, "«", page - 1));
+            menu.add(menuElements.addElement(player, new TextElement(0, 0, "Level: ")));
+            menu.add(menuElements.addElement(player, new TextElement(0, 2, "Minimum exp: ")));
+            menu.add(menuElements.addElement(player, new TextElement(0, 4, "Maximum exp: ")));
+            menu.add(menuElements.addElement(player, new TextElement(0, 6, "Minimum damage: ")));
+            menu.add(menuElements.addElement(player, new TextElement(0, 8, "Maximum damage: ")));
+            menu.add(menuElements.addElement(player, new TextElement(0, 10, "Minimum protection: ")));
+            menu.add(menuElements.addElement(player, new TextElement(0, 12, "Maximum protection: ")));
+            menu.add(menuElements.addElement(player, entityLevelInput(player, String.valueOf(NullValues.replaceNullValues(yCreator.getPersistentEntityLevelInput())))));
+            menu.add(menuElements.addElement(player, entityMinimumEXPInput(player, String.valueOf(NullValues.replaceNullValues(yCreator.getPersistentEntityMinimumEXPInput())))));
+            menu.add(menuElements.addElement(player, entityMaximumEXPInput(player, String.valueOf(NullValues.replaceNullValues(yCreator.getPersistentEntityMaximumEXPInput())))));
+            menu.add(menuElements.addElement(player, entityMinimumDamageInput(player, String.valueOf(NullValues.replaceNullValues(yCreator.getPersistentEntityMinimumDamageInput())))));
+            menu.add(menuElements.addElement(player, entityMaximumDamageInput(player, String.valueOf(NullValues.replaceNullValues(yCreator.getPersistentEntityMaximumDamageInput())))));
+            menu.add(menuElements.addElement(player, entityMinimumProtectionInput(player, String.valueOf(NullValues.replaceNullValues(yCreator.getPersistentEntityMinimumProtectionInput())))));
+            menu.add(menuElements.addElement(player, entityMaximumProtectionInput(player, String.valueOf(NullValues.replaceNullValues(yCreator.getPersistentEntityMaximumProtectionInput())))));
+            menu.add(menuElements.addElement(player, setPageMenuContent(menu, player, 200, 18, "»", page + 1)));
+            menu.add(menuElements.addElement(player, setPageMenuContent(menu, player, 0, 18, "«", page - 1)));
         }
         if (page == 3) {
-            chatMenu.add(new TextElement(0, 4, "Main hand: "));
-            chatMenu.add(new TextElement(0, 6, "Helmet: "));
-            chatMenu.add(new TextElement(0, 8, "Chestplate: "));
-            chatMenu.add(new TextElement(0, 10, "Leggings: "));
-            chatMenu.add(new TextElement(0, 12, "Boots: "));
-            chatMenu.add(entityHeldItemInput(player, (String) NullValues.replaceNullValues(yCreator.getPersistentEntityHeldItemInput())));
-            chatMenu.add(entityHelmetInput(player, (String) NullValues.replaceNullValues(yCreator.getPersistentEntityHelmetInput())));
-            chatMenu.add(entityChestplateInput(player, (String) NullValues.replaceNullValues(yCreator.getPersistentEntityChestplateInput())));
-            chatMenu.add(entityLeggingsInput(player, (String) NullValues.replaceNullValues(yCreator.getPersistentEntityLeggingsInput())));
-            chatMenu.add(entityBootsInput(player, (String) NullValues.replaceNullValues(yCreator.getPersistentEntityBootsInput())));
-            chatMenu.add(goToEntityCreateMenu(chatMenu, player, 0, 18, "«", page - 1));
+            menu.add(menuElements.addElement(player, new TextElement(0, 4, "Main hand: ")));
+            menu.add(menuElements.addElement(player, new TextElement(0, 6, "Helmet: ")));
+            menu.add(menuElements.addElement(player, new TextElement(0, 8, "Chestplate: ")));
+            menu.add(menuElements.addElement(player, new TextElement(0, 10, "Leggings: ")));
+            menu.add(menuElements.addElement(player, new TextElement(0, 12, "Boots: ")));
+            menu.add(menuElements.addElement(player, entityHeldItemInput(player, (String) NullValues.replaceNullValues(yCreator.getPersistentEntityHeldItemInput()))));
+            menu.add(menuElements.addElement(player, entityHelmetInput(player, (String) NullValues.replaceNullValues(yCreator.getPersistentEntityHelmetInput()))));
+            menu.add(menuElements.addElement(player, entityChestplateInput(player, (String) NullValues.replaceNullValues(yCreator.getPersistentEntityChestplateInput()))));
+            menu.add(menuElements.addElement(player, entityLeggingsInput(player, (String) NullValues.replaceNullValues(yCreator.getPersistentEntityLeggingsInput()))));
+            menu.add(menuElements.addElement(player, entityBootsInput(player, (String) NullValues.replaceNullValues(yCreator.getPersistentEntityBootsInput()))));
+            menu.add(menuElements.addElement(player, setPageMenuContent(menu, player, 0, 18, "«", page - 1)));
         }
-        chatMenu.setPauseChat(true);
-        chatMenu.openFor(player);
+        return menu;
     }
 
     private ButtonElement closeDefaultMenu(ChatMenu menu, Player player) {
         return new ButtonElement(100, 18, ChatColor.RED + "[Close]", player1 -> {
             menu.setPauseChat(false);
             menu.close(player);
-            for (int i = 0; i < 200; i++) {
-                player.sendMessage("\n");
-            }
             YCreator yCreator = new YCreator(player);
             if (yCreator.getPersistentEntitySpawnInput() == (byte) 1) {
-                YEntities mob = new YEntities(player, yCreator.getPersistentEntityTypeInput(), yCreator.getPersistentEntityNameInput())
+                YEntities mob = new YEntities(yCreator.getPersistentEntityTypeInput(), yCreator.getPersistentEntityNameInput())
                         .setMaximumHealth(yCreator.getPersistentEntityHealthInput())
                         .setMinimumExp(yCreator.getPersistentEntityMinimumEXPInput())
                         .setMaximumExp(yCreator.getPersistentEntityMaximumEXPInput())
@@ -195,7 +193,7 @@ public class EntityEditor {
             String currentValue = state.getCurrent();
             if ((currentValue != null) && INumber.isParsableAsDouble(currentValue)) {
                 double currentValueDouble = Double.parseDouble(currentValue);
-                player.getPersistentDataContainer().set(YNamespacedKeys.CREATOR_ENTITY_MINIMUM_EXP, PersistentDataType.DOUBLE, currentValueDouble);
+                player.getPersistentDataContainer().set(YNamespacedKeys.CREATOR_ENTITY_MINIMUM_EXPERIENCE, PersistentDataType.DOUBLE, currentValueDouble);
             }
         });
         return entityMaximumDamageInput;
@@ -207,7 +205,7 @@ public class EntityEditor {
             String currentValue = state.getCurrent();
             if ((currentValue != null) && INumber.isParsableAsDouble(currentValue)) {
                 double currentValueDouble = Double.parseDouble(currentValue);
-                player.getPersistentDataContainer().set(YNamespacedKeys.CREATOR_ENTITY_MAXIMUM_EXP, PersistentDataType.DOUBLE, currentValueDouble);
+                player.getPersistentDataContainer().set(YNamespacedKeys.CREATOR_ENTITY_MAXIMUM_EXPERIENCE, PersistentDataType.DOUBLE, currentValueDouble);
             }
         });
         return entityMaximumDamageInput;

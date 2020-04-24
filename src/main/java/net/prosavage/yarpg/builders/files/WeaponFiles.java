@@ -69,92 +69,92 @@ public class WeaponFiles {
     }
 
     public WeaponFiles setActualMaterial(String actualMaterial) {
-        this.getWeaponConfiguration().set("weaponActualMaterial", actualMaterial);
+        this.getWeaponConfiguration().set("weapon_actual_material", actualMaterial);
         return this;
     }
 
     public WeaponFiles setCosmeticMaterial(String cosmeticMaterial) {
-        this.getWeaponConfiguration().set("weaponCosmeticMaterial", cosmeticMaterial);
+        this.getWeaponConfiguration().set("weapon_cosmetic_material", cosmeticMaterial);
         return this;
     }
 
     public WeaponFiles setBackgroundLore(List<String> backgroundLore) {
-        this.getWeaponConfiguration().set("weaponBackgroundLore", backgroundLore);
+        this.getWeaponConfiguration().set("weapon_background_lore", backgroundLore);
         return this;
     }
 
     public WeaponFiles setMinimumLevel(int minimumLevel) {
-        this.getWeaponConfiguration().set("weaponMinimumLevel", minimumLevel);
+        this.getWeaponConfiguration().set("weapon_minimum_level", minimumLevel);
         return this;
     }
 
     public WeaponFiles setMaximumLevel(int maximumLevel) {
-        this.getWeaponConfiguration().set("weaponMaximumLevel", maximumLevel);
+        this.getWeaponConfiguration().set("weapon_maximum_level", maximumLevel);
         return this;
     }
 
     public WeaponFiles setMinimumDamage(double minimumDamage) {
-        this.getWeaponConfiguration().set("weaponMinimumDamage", minimumDamage);
+        this.getWeaponConfiguration().set("weapon_minimum_damage", minimumDamage);
         return this;
     }
 
     public WeaponFiles setMaximumDamage(double maximumDamage) {
-        this.getWeaponConfiguration().set("weaponMaximumDamage", maximumDamage);
+        this.getWeaponConfiguration().set("weapon_maximum_damage", maximumDamage);
         return this;
     }
 
     public WeaponFiles setAttackCooldown(double attackCooldown) {
-        this.getWeaponConfiguration().set("weaponAttackCooldown", attackCooldown);
+        this.getWeaponConfiguration().set("weapon_attack_cooldown", attackCooldown);
         return this;
     }
 
     public WeaponFiles setMinimumGem(int minimumGem) {
-        this.getWeaponConfiguration().set("weaponMinimumGem", minimumGem);
+        this.getWeaponConfiguration().set("weapon_minimum_gem", minimumGem);
         return this;
     }
 
     public WeaponFiles setMaximumGem(int maximumGem) {
-        this.getWeaponConfiguration().set("weaponMaximumGem", maximumGem);
+        this.getWeaponConfiguration().set("weapon_maximum_gem", maximumGem);
         return this;
     }
 
     public WeaponFiles setMinimumScroll(int minimumScroll) {
-        this.getWeaponConfiguration().set("weaponMinimumScroll", minimumScroll);
+        this.getWeaponConfiguration().set("weapon_minimum_dcroll", minimumScroll);
         return this;
     }
 
     public WeaponFiles setMaximumScroll(int maximumScroll) {
-        this.getWeaponConfiguration().set("weaponMaximumScroll", maximumScroll);
+        this.getWeaponConfiguration().set("weapon_maximum_scroll", maximumScroll);
         return this;
     }
 
     public WeaponFiles setAbilityName(String abilityName) {
-        this.getWeaponConfiguration().set("weaponAbilityName", abilityName);
+        this.getWeaponConfiguration().set("weapon_ability_name", abilityName);
         return this;
     }
 
     public WeaponFiles setAbilityDescription(List<String> abilityDescription) {
-        this.getWeaponConfiguration().set("weaponAbilityDescription", abilityDescription);
+        this.getWeaponConfiguration().set("weapon_ability_description", abilityDescription);
         return this;
     }
 
     public WeaponFiles setAbilityCastType(String abilityCastType) {
-        this.getWeaponConfiguration().set("weaponAbilityCastType", abilityCastType);
+        this.getWeaponConfiguration().set("weapon_ability_cast_type", abilityCastType);
         return this;
     }
 
     public WeaponFiles setAbilityActionType(String abilityActionType) {
-        this.getWeaponConfiguration().set("weaponAbilityActionType", abilityActionType);
+        this.getWeaponConfiguration().set("weapon_ability_action_type", abilityActionType);
         return this;
     }
 
     public WeaponFiles setAbilityCooldown(double abilityCooldown) {
-        this.getWeaponConfiguration().set("weaponAbilityCooldown", abilityCooldown);
+        this.getWeaponConfiguration().set("weapon_ability_cooldown", abilityCooldown);
         return this;
     }
 
     public WeaponFiles setAbilityManaCost(double abilityManaCost) {
-        this.getWeaponConfiguration().set("weaponAbilityManaCost", abilityManaCost);
+        this.getWeaponConfiguration().set("weapon_ability_mana_cost", abilityManaCost);
         return this;
     }
 
@@ -175,75 +175,75 @@ public class WeaponFiles {
     }
 
     public String getActualMaterial() {
-        return this.getWeaponConfiguration().getString("weaponActualMaterial");
+        return this.getWeaponConfiguration().getString("weapon_actual_material");
     }
 
     public String getCosmeticMaterial() {
-        return this.getWeaponConfiguration().getString("weaponCosmeticMaterial");
+        return this.getWeaponConfiguration().getString("weapon_cosmetic_material");
     }
 
     public List<String> getBackgroundLore() {
-        return this.getWeaponConfiguration().getStringList("weaponBackgroundLore");
+        return this.getWeaponConfiguration().getStringList("weapon_background_lore");
     }
 
     public int getMinimumLevel() {
-        return this.getWeaponConfiguration().getInt("weaponMinimumLevel");
+        return this.getWeaponConfiguration().getInt("weapon_minimum_level");
     }
 
     public double getMaximumLevel() {
-        return this.getWeaponConfiguration().getInt("weaponMaximumLevel");
+        return this.getWeaponConfiguration().getInt("weapon_maximum_level");
     }
 
     public double getMinimumDamage() {
-        return this.getWeaponConfiguration().getDouble("weaponMinimumDamage");
+        return this.getWeaponConfiguration().getDouble("weapon_minimum_damage");
     }
 
     public double getMaximumDamage() {
-        return this.getWeaponConfiguration().getDouble("weaponMaximumDamage");
+        return this.getWeaponConfiguration().getDouble("weapon_maximum_damage");
     }
 
     public double getAttackCooldown() {
-        return this.getWeaponConfiguration().getDouble("weaponAttackCooldown");
+        return this.getWeaponConfiguration().getDouble("weapon_attack_cooldown");
     }
 
     public int getMinimumGem() {
-        return this.getWeaponConfiguration().getInt("weaponMinimumGem");
+        return this.getWeaponConfiguration().getInt("weapon_minimum_gem");
     }
 
     public int getMaximumGem() {
-        return this.getWeaponConfiguration().getInt("weaponMaximumGem");
+        return this.getWeaponConfiguration().getInt("weapon_maximum_gem");
     }
 
     public int getMinimumScroll() {
-        return this.getWeaponConfiguration().getInt("weaponMinimumScroll");
+        return this.getWeaponConfiguration().getInt("weapon_minimum_dcroll");
     }
 
     public int getMaximumScroll() {
-        return this.getWeaponConfiguration().getInt("weaponMaximumScroll");
+        return this.getWeaponConfiguration().getInt("weapon_maximum_scroll");
     }
 
     public String getAbilityName() {
-        return this.getWeaponConfiguration().getString("weaponAbilityName");
+        return this.getWeaponConfiguration().getString("weapon_ability_name");
     }
 
     public List<String> getAbilityDescription() {
-        return this.getWeaponConfiguration().getStringList("weaponAbilityDescription");
+        return this.getWeaponConfiguration().getStringList("weapon_ability_description");
     }
 
     public String getAbilityCastType() {
-        return this.getWeaponConfiguration().getString("weaponAbilityCastType");
+        return this.getWeaponConfiguration().getString("weapon_ability_cast_type");
     }
 
     public String getAbilityActionType() {
-        return this.getWeaponConfiguration().getString("weaponAbilityActionType");
+        return this.getWeaponConfiguration().getString("weapon_ability_action_type");
     }
 
     public double getAbilityCooldown() {
-        return this.getWeaponConfiguration().getDouble("weaponAbilityCooldown");
+        return this.getWeaponConfiguration().getDouble("weapon_ability_cooldown");
     }
 
     public double getAbilityManaCost() {
-        return this.getWeaponConfiguration().getDouble("weaponAbilityManaCost");
+        return this.getWeaponConfiguration().getDouble("weapon_ability_mana_cost");
     }
 
     public File[] getRarityFolders() {

@@ -82,13 +82,13 @@ public class Ability {
         File file = new File(net.prosavage.yarpg.YaRPG.getInstance().getDataFolder(), "abilities\\" + name + ".yml");
         if (!(file.exists())){
             Config config = new Config(net.prosavage.yarpg.YaRPG.getInstance(), "abilities\\" + name + ".yml");
-            config.set("ability-name", this.name);
-            config.set("ability-mana-cost", this.mana);
-            config.set("ability-cooldown", this.cooldown);
-            config.set("ability-description", this.description);
-            config.set("ability-left-click-action", this.hasLeftAction);
-            config.set("ability-right-click-action", this.hasRightAction);
-            config.set("ability-drop-action", this.hasDropAction);
+            config.set("ability_name", this.name);
+            config.set("ability_mana_cost", this.mana);
+            config.set("ability_cooldown", this.cooldown);
+            config.set("ability_description", this.description);
+            config.set("ability_left_click_action", this.hasLeftAction);
+            config.set("ability_right_click_action", this.hasRightAction);
+            config.set("ability_drop_action", this.hasDropAction);
             config.saveFile();
         }
         if (this.hasLeftAction){

@@ -27,8 +27,13 @@ public class ArmorCommand implements CommandExecutor {
                 player.sendMessage(Color.ify("------------------------------------------------"));
             }
             if (args.length >= 1) {
-                if (args[0].equals("edit")) {
-                    ArmorItemEditor.getArmorCreateMenu(player, 1);
+                if (args[0].equalsIgnoreCase("edit")) {
+                    ArmorItemEditor.openMenu(player);
+                }
+                if (args[0].equalsIgnoreCase("forloop")) {
+                    for (int i = 0; i < 100; i++){
+                        player.sendMessage(String.valueOf(i));
+                    }
                 }
                 return true;
             }

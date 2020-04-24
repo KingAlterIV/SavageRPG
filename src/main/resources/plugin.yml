@@ -11,7 +11,7 @@ description: An RPG core.
 description: Yet Another RPG Core... but this one is customizable and free!
 >>>>>>> 44737fc... Renamed things to YaRPG, added in new commands, fixed formatting, file count fixed, etc. / 12:00:11.62 - Sat 04/04/2020
 depend:
-  - ChatMenuAPI
+  - ProtocolLib
 softdepend:
   - WorldGuard
 >>>>>>> 71fac37... Renamed things back, new & better files manager, more stuff fixed.

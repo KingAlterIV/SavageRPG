@@ -1,14 +1,10 @@
 package net.prosavage.yarpg.builders.entities;
 
-import com.sk89q.worldedit.bukkit.BukkitAdapter;
-import com.sk89q.worldguard.WorldGuard;
-import com.sk89q.worldguard.protection.ApplicableRegionSet;
-import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import com.sk89q.worldguard.protection.regions.RegionContainer;
-import com.sk89q.worldguard.protection.regions.RegionQuery;
+import net.prosavage.yarpg.YaRPG;
 import net.prosavage.yarpg.api.keys.YNamespacedKeys;
+import net.prosavage.yarpg.utils.Color;
 import net.prosavage.yarpg.utils.INumber;
-import net.prosavage.yarpg.utils.Warnings;
+import net.prosavage.yarpg.utils.Placeholders;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -19,56 +15,50 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import java.util.List;
 
-/*
-
-This class is named YEntityBuilder because Entity is taken by Spigot
-and I did not want to mess that up.
-
-*/
-
 public class YEntities {
 
     INumber INumber = new INumber();
+    Color Color = new Color();
+    Placeholders Placeholders = new Placeholders();
 
-    private Player player;
+    private Mob entity;
     private EntityType entityType;
     private String name;
-    private int level;
-    private double health;
+    private int level = 1;
+    private double health = 20.0;
     private double minimumHealth = 20;
     private double maximumHealth = 20;
-    private double exp;
-    private double minimumExp;
-    private double maximumExp;
-    private double damage;
-    private double minimumDamage;
-    private double maximumDamage;
-    private double protection;
-    private double minimumProtection;
-    private double maximumProtection;
-    private ItemStack heldItem;
-    private ItemStack helmet;
-    private ItemStack chestplate;
-    private ItemStack leggings;
-    private ItemStack boots;
+    private double exp = 0.0;
+    private double minimumExp = 0.0;
+    private double maximumExp = 0.0;
+    private double damage = 0.0;
+    private double minimumDamage = 0.0;
+    private double maximumDamage = 0.0;
+    private double protection = 0.0;
+    private double minimumProtection = 0.0;
+    private double maximumProtection = 0.0;
+    private ItemStack heldItem = new ItemStack(Material.AIR);
+    private ItemStack helmet = new ItemStack(Material.AIR);
+    private ItemStack chestplate = new ItemStack(Material.AIR);
+    private ItemStack leggings = new ItemStack(Material.AIR);
+    private ItemStack boots = new ItemStack(Material.AIR);
     private List<String> pluginDrops;
     private List<ItemStack> minecraftDrops;
-    private String region;
     private boolean spawned;
-    private boolean errors;
 
-    public YEntities(Player player, String entityType, String name) {
-        try{
-            this.player = player;
-            this.entityType = EntityType.valueOf(entityType.toUpperCase());
-        } catch (IllegalArgumentException ignored) {
-            this.errors = true;
-            new Warnings(this.player, "title", "&6&lEntity Type &fis invalid!");
+    public YEntities(Entity entity, String name) {
+        if (entity instanceof Mob) {
+            this.entity = (Mob) entity;
         }
         this.name = name;
     }
 
-    public YEntities(Player player, EntityType entityType, String name) {
+    public YEntities(String entityType, String name) {
+        this.entityType = EntityType.valueOf(entityType.toUpperCase());
+        this.name = name;
+    }
+
+    public YEntities(EntityType entityType, String name) {
         this.entityType = entityType;
         this.name = name;
     }
@@ -164,51 +154,27 @@ public class YEntities {
     }
 
     public YEntities setHeldItem(String heldItem) {
-        try{
-            this.heldItem = new ItemStack(Material.valueOf(heldItem.toUpperCase()));
-        } catch (IllegalArgumentException ignored) {
-            new Warnings(this.player, "title", "&6&lHeld Item Type &fis invalid!");
-        }
+        this.heldItem = new ItemStack(Material.valueOf(heldItem.toUpperCase()));
         return this;
     }
 
     public YEntities setHelmet(String helmet) {
-        try{
-            this.helmet = new ItemStack(Material.valueOf(helmet.toUpperCase()));
-        } catch (IllegalArgumentException ignored) {
-            this.errors = true;
-            new Warnings(this.player, "title", "&6&lHelmet Item Type &fis invalid!");
-        }
+        this.helmet = new ItemStack(Material.valueOf(helmet.toUpperCase()));
         return this;
     }
 
     public YEntities setChestplate(String chestplate) {
-        try{
-            this.chestplate = new ItemStack(Material.valueOf(chestplate.toUpperCase()));
-        } catch (IllegalArgumentException ignored) {
-            this.errors = true;
-            new Warnings(this.player, "title", "&6&lChestplate Item Type &fis invalid!");
-        }
+        this.chestplate = new ItemStack(Material.valueOf(chestplate.toUpperCase()));
         return this;
     }
 
     public YEntities setLeggings(String leggings) {
-        try{
-            this.leggings = new ItemStack(Material.valueOf(leggings.toUpperCase()));
-        } catch (IllegalArgumentException ignored) {
-            this.errors = true;
-            new Warnings(this.player, "title", "&6&lLeggings Item Type &fis invalid!");
-        }
+        this.leggings = new ItemStack(Material.valueOf(leggings.toUpperCase()));
         return this;
     }
 
     public YEntities setBoots(String boots) {
-        try{
-            this.boots = new ItemStack(Material.valueOf(boots.toUpperCase()));
-        } catch (IllegalArgumentException ignored) {
-            this.errors = true;
-            new Warnings(this.player, "title", "&6&lBoots Item Type &fis invalid!");
-        }
+        this.boots = new ItemStack(Material.valueOf(boots.toUpperCase()));
         return this;
     }
 
@@ -247,18 +213,15 @@ public class YEntities {
         return this;
     }
 
-    public YEntities setRegion(String region) {
-        this.region = region;
-        return this;
-    }
-
     public YEntities setPersistentDataContainers(Entity entity){
         PersistentDataContainer persistentDataContainer = entity.getPersistentDataContainer();
+        persistentDataContainer.set(YNamespacedKeys.ENTITY_NAME, PersistentDataType.STRING, this.name);
+        persistentDataContainer.set(YNamespacedKeys.ENTITY_HEALTH, PersistentDataType.DOUBLE, this.health);
         persistentDataContainer.set(YNamespacedKeys.ENTITY_MINIMUM_HEALTH, PersistentDataType.DOUBLE, this.minimumHealth);
         persistentDataContainer.set(YNamespacedKeys.ENTITY_MAXIMUM_HEALTH, PersistentDataType.DOUBLE, this.maximumHealth);
-        persistentDataContainer.set(YNamespacedKeys.ENTITY_EXP, PersistentDataType.DOUBLE, this.exp);
-        persistentDataContainer.set(YNamespacedKeys.ENTITY_MINIMUM_EXP, PersistentDataType.DOUBLE, this.minimumExp);
-        persistentDataContainer.set(YNamespacedKeys.ENTITY_MAXIMUM_EXP, PersistentDataType.DOUBLE, this.maximumExp);
+        persistentDataContainer.set(YNamespacedKeys.ENTITY_EXPERIENCE, PersistentDataType.DOUBLE, this.exp);
+        persistentDataContainer.set(YNamespacedKeys.ENTITY_MINIMUM_EXPERIENCE, PersistentDataType.DOUBLE, this.minimumExp);
+        persistentDataContainer.set(YNamespacedKeys.ENTITY_MAXIMUM_EXPERIENCE, PersistentDataType.DOUBLE, this.maximumExp);
         persistentDataContainer.set(YNamespacedKeys.ENTITY_MINIMUM_DAMAGE, PersistentDataType.DOUBLE, this.minimumDamage);
         persistentDataContainer.set(YNamespacedKeys.ENTITY_MAXIMUM_DAMAGE, PersistentDataType.DOUBLE, this.maximumDamage);
         persistentDataContainer.set(YNamespacedKeys.ENTITY_PROTECTION, PersistentDataType.DOUBLE, this.protection);
@@ -355,10 +318,6 @@ public class YEntities {
         return this.minecraftDrops;
     }
 
-    public String getRegion() {
-        return region;
-    }
-
     public YEntities spawn(Location location, boolean randomEverything) {
         if (randomEverything){
             setHealth(0.0, true);
@@ -367,55 +326,48 @@ public class YEntities {
             setProtection(0.0, true);
         }
         World world = location.getWorld();
-        assert entityType.getEntityClass() != null;
-        RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
-        RegionQuery query = regionContainer.createQuery();
-        ApplicableRegionSet regions = query.getApplicableRegions(BukkitAdapter.adapt(location));
-        if (!(errors)) {
-            if (this.region != null) {
-                for (ProtectedRegion region : regions) {
-                    if (region.getId().equals(this.region)) {
-                        if (!spawned) {
-                            world.spawn(location, entityType.getEntityClass(), consumer -> {
-                                if (consumer instanceof LivingEntity) {
-                                    LivingEntity consumerLiving = (LivingEntity) consumer;
-                                    consumerLiving.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(this.health);
-                                    consumerLiving.setHealth(this.health);
-                                    consumerLiving.setCustomName(this.name);
-                                    consumerLiving.setCustomNameVisible(true);
-                                    consumerLiving.getEquipment().setItemInMainHand(this.heldItem);
-                                    consumerLiving.getEquipment().setHelmet(this.helmet);
-                                    consumerLiving.getEquipment().setChestplate(this.chestplate);
-                                    consumerLiving.getEquipment().setLeggings(this.leggings);
-                                    consumerLiving.getEquipment().setBoots(this.boots);
-                                    consumerLiving.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(this.damage);
-                                    consumerLiving.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(this.protection);
-                                    setPersistentDataContainers(consumerLiving);
-                                }
-                            });
-                            spawned = true;
-                        }
+        if (entityType != null) {
+            if (!spawned) {
+                world.spawn(location, entityType.getEntityClass(), consumer -> {
+                    if (consumer instanceof Mob) {
+                        Mob consumerLiving = (Mob) consumer;
+                        consumerLiving.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(this.health);
+                        consumerLiving.setHealth(this.health);
+                        consumerLiving.setCustomName(this.name);
+                        consumerLiving.setCustomNameVisible(true);
+                        consumerLiving.getEquipment().setItemInMainHand(this.heldItem);
+                        consumerLiving.getEquipment().setHelmet(this.helmet);
+                        consumerLiving.getEquipment().setChestplate(this.chestplate);
+                        consumerLiving.getEquipment().setLeggings(this.leggings);
+                        consumerLiving.getEquipment().setBoots(this.boots);
+                        consumerLiving.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(this.damage);
+                        consumerLiving.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(this.protection);
+                        setPersistentDataContainers(consumerLiving);
+                        consumerLiving.setCustomName(Color.ify(Placeholders.forEntities(consumerLiving, YaRPG.getInstance().getConfig().getString("format.entity_names"))));
                     }
-                }
+                });
+                spawned = true;
                 return this;
             }
-            world.spawn(location, entityType.getEntityClass(), consumer -> {
-                if (consumer instanceof LivingEntity) {
-                    LivingEntity consumerLiving = (LivingEntity) consumer;
-                    consumerLiving.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(this.health);
-                    consumerLiving.setHealth(this.health);
-                    consumerLiving.setCustomName(this.name);
-                    consumerLiving.setCustomNameVisible(true);
-                    consumerLiving.getEquipment().setItemInMainHand(this.heldItem);
-                    consumerLiving.getEquipment().setHelmet(this.helmet);
-                    consumerLiving.getEquipment().setChestplate(this.chestplate);
-                    consumerLiving.getEquipment().setLeggings(this.leggings);
-                    consumerLiving.getEquipment().setBoots(this.boots);
-                    consumerLiving.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(this.damage);
-                    consumerLiving.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(this.protection);
-                    setPersistentDataContainers(consumerLiving);
-                }
-            });
+        }else if (entity != null){
+            entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(this.health);
+            entity.setHealth(this.health);
+            entity.setCustomName(this.name);
+            entity.setCustomNameVisible(true);
+            entity.getEquipment().setItemInMainHand(this.heldItem);
+            entity.getEquipment().setHelmet(this.helmet);
+            entity.getEquipment().setChestplate(this.chestplate);
+            entity.getEquipment().setLeggings(this.leggings);
+            entity.getEquipment().setBoots(this.boots);
+            if (entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE) != null) {
+                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(this.damage);
+            }
+            if (entity.getAttribute(Attribute.GENERIC_ARMOR) != null) {
+                entity.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(this.protection);
+            }
+            setPersistentDataContainers(entity);
+            entity.setCustomName(Color.ify(Placeholders.forEntities(entity, YaRPG.getInstance().getConfig().getString("format.entity_names"))));
+            return this;
         }
         return this;
     }

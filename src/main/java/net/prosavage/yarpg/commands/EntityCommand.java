@@ -28,7 +28,7 @@ public class EntityCommand implements CommandExecutor {
             }
             else {
                 if (args[0].equalsIgnoreCase("edit")) {
-                    EntityEditor.getEntityCreateMenu(player, 1);
+                    EntityEditor.openMenu(player);
                 }
                 return true;
             }

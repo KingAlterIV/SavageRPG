@@ -36,17 +36,17 @@ public class AbilityFiles {
     }
 
     public AbilityFiles setManaCost(double manaCost) {
-        this.getAbilityConfiguration().set("abilityManaCost", manaCost);
+        this.getAbilityConfiguration().set("ability_mana_cost", manaCost);
         return this;
     }
 
     public AbilityFiles setCooldown(double cooldown) {
-        this.getAbilityConfiguration().set("abilityCooldown", cooldown);
+        this.getAbilityConfiguration().set("ability_cooldown", cooldown);
         return this;
     }
 
     public AbilityFiles setDescription(List<String> description) {
-        this.getAbilityConfiguration().set("abilityDescription", description);
+        this.getAbilityConfiguration().set("ability_description", description);
         return this;
     }
 
@@ -55,15 +55,15 @@ public class AbilityFiles {
     }
 
     public double getManaCost() {
-        return this.getAbilityConfiguration().getDouble("abilityManaCost");
+        return this.getAbilityConfiguration().getDouble("ability_mana_cost");
     }
 
     public double getCooldown() {
-        return this.getAbilityConfiguration().getDouble("abilityCooldown");
+        return this.getAbilityConfiguration().getDouble("ability_cooldown");
     }
 
     public List<String> getDescription() {
-        return this.getAbilityConfiguration().getStringList("abilityDescription");
+        return this.getAbilityConfiguration().getStringList("ability_description");
     }
 
     public File getAbilityFile() {
@@ -87,14 +87,14 @@ public class AbilityFiles {
     }
 
     public boolean isLeftClickAction(){
-        return this.getAbilityConfiguration().getBoolean("abilityLeftClickAction");
+        return this.getAbilityConfiguration().getBoolean("ability_leftclick_action");
     }
 
     public boolean isRightClickAction(){
-        return this.getAbilityConfiguration().getBoolean("abilityLeftClickAction");
+        return this.getAbilityConfiguration().getBoolean("ability_rightclick_action");
     }
 
     public boolean isDroppableAction(){
-        return this.getAbilityConfiguration().getBoolean("abilityLeftClickAction");
+        return this.getAbilityConfiguration().getBoolean("ability_drop_action");
     }
 }

@@ -1,6 +1,13 @@
 server-startup:
   big-fat-bloody-message-enabled: false
 
+formulas:
+  maximum_experience: '({PLAYER-LEVEL} * 250)^1.1'
+
+format:
+  actionbar: '&c❤&7: &c{PLAYER-HEALTH}&7/&c{PLAYER-MAXIMUM-HEALTH}&7 &e✦&7: &e{PLAYER-LEVEL} &a✧&7: &a{PLAYER-EXPERIENCE}&7/&a{PLAYER-MAXIMUM-EXPERIENCE}'
+  entity_names: '&7[&e{ENTITY-LEVEL}&7] &7[&e{ENTITY-NAME}&7] &7[&c{ENTITY-HEALTH}&7/&c{ENTITY-MAXIMUM-HEALTH}&7]'
+
 weapon:
   lore:
     - ' '

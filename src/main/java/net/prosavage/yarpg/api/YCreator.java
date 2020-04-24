@@ -230,12 +230,12 @@ public class YCreator {
     }
 
     public double getPersistentEntityMinimumEXPInput() {
-        return this.player.getPersistentDataContainer().getOrDefault(YNamespacedKeys.CREATOR_ENTITY_MINIMUM_EXP,
+        return this.player.getPersistentDataContainer().getOrDefault(YNamespacedKeys.CREATOR_ENTITY_MINIMUM_EXPERIENCE,
                 PersistentDataType.DOUBLE, 0.0);
     }
 
     public double getPersistentEntityMaximumEXPInput() {
-        return this.player.getPersistentDataContainer().getOrDefault(YNamespacedKeys.CREATOR_ENTITY_MAXIMUM_EXP,
+        return this.player.getPersistentDataContainer().getOrDefault(YNamespacedKeys.CREATOR_ENTITY_MAXIMUM_EXPERIENCE,
                 PersistentDataType.DOUBLE, 0.0);
     }
 

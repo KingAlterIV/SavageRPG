@@ -1,10 +1,11 @@
 package net.prosavage.yarpg.api.keys;
 
+import net.prosavage.yarpg.YaRPG;
 import org.bukkit.NamespacedKey;
 
 public final class YNamespacedKeys {
 
-    private static final net.prosavage.yarpg.YaRPG PLUGIN = net.prosavage.yarpg.YaRPG.getInstance();
+    private static final YaRPG PLUGIN = YaRPG.getInstance();
 
 <<<<<<< HEAD
     public static final NamespacedKey ITEM_NAME = create("item_name");
@@ -145,23 +146,24 @@ public final class YNamespacedKeys {
     public static final NamespacedKey ENTITY_HEALTH = create("entity_region");
     public static final NamespacedKey ENTITY_MINIMUM_HEALTH = create("entity_minimum_health");
     public static final NamespacedKey ENTITY_MAXIMUM_HEALTH = create("entity_maximum_health");
-    public static final NamespacedKey ENTITY_EXP = create("entity_exp");
-    public static final NamespacedKey ENTITY_MINIMUM_EXP = create("entity_minimum_exp");
-    public static final NamespacedKey ENTITY_MAXIMUM_EXP = create("entity_maximum_exp");
+    public static final NamespacedKey ENTITY_EXPERIENCE = create("entity_experience");
+    public static final NamespacedKey ENTITY_MINIMUM_EXPERIENCE = create("entity_minimum_experience");
+    public static final NamespacedKey ENTITY_MAXIMUM_EXPERIENCE = create("entity_maximum_experience");
     public static final NamespacedKey ENTITY_DAMAGE = create("entity_damage");
     public static final NamespacedKey ENTITY_MINIMUM_DAMAGE = create("entity_minimum_damage");
     public static final NamespacedKey ENTITY_MAXIMUM_DAMAGE = create("entity_maximum_damage");
     public static final NamespacedKey ENTITY_PROTECTION = create("entity_protection");
     public static final NamespacedKey ENTITY_MINIMUM_PROTECTION = create("entity_minimum_protection");
     public static final NamespacedKey ENTITY_MAXIMUM_PROTECTION = create("entity_maximum_protection");
+    public static final NamespacedKey ENTITY_SPAWNED = create("entity_spawned");
 
     public static final NamespacedKey CREATOR_ENTITY_TYPE = create("creator_entity_type");
     public static final NamespacedKey CREATOR_ENTITY_NAME = create("creator_entity_name");
     public static final NamespacedKey CREATOR_ENTITY_LEVEL = create("creator_entity_level");
     public static final NamespacedKey CREATOR_ENTITY_REGION = create("creator_entity_region");
     public static final NamespacedKey CREATOR_ENTITY_HEALTH = create("creator_entity_health");
-    public static final NamespacedKey CREATOR_ENTITY_MINIMUM_EXP = create("creator_entity_minimum_exp");
-    public static final NamespacedKey CREATOR_ENTITY_MAXIMUM_EXP = create("creator_entity_maximum_exp");
+    public static final NamespacedKey CREATOR_ENTITY_MINIMUM_EXPERIENCE = create("creator_entity_minimum_experience");
+    public static final NamespacedKey CREATOR_ENTITY_MAXIMUM_EXPERIENCE = create("creator_entity_maximum_experience");
     public static final NamespacedKey CREATOR_ENTITY_MINIMUM_DAMAGE = create("creator_entity_minimum_damage");
     public static final NamespacedKey CREATOR_ENTITY_MAXIMUM_DAMAGE = create("creator_entity_maximum_damage");
     public static final NamespacedKey CREATOR_ENTITY_MINIMUM_PROTECTION = create("creator_entity_minimum_protection");
@@ -172,6 +174,10 @@ public final class YNamespacedKeys {
     public static final NamespacedKey CREATOR_ENTITY_BOOTS = create("creator_entity_boots");
     public static final NamespacedKey CREATOR_ENTITY_HELD_ITEM = create("creator_entity_held_item");
     public static final NamespacedKey CREATOR_ENTITY_SPAWN_ENTITY = create("creator_entity_spawn_entity");
+
+    public static final NamespacedKey PLAYER_LEVEL = create("player_level");
+    public static final NamespacedKey PLAYER_EXPERIENCE = create("player_experience");
+    public static final NamespacedKey PLAYER_MAXIMUM_EXPERIENCE = create("player_maximum_experience");
 
     public static final NamespacedKey[] ALL_ITEM_NAME_SPACED_KEYS = {
             // This is for weapons

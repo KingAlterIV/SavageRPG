@@ -6,7 +6,7 @@ import net.prosavage.yarpg.utils.Color;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.jetbrains.annotations.NotNull;
 
 public class YaRPGCommand implements CommandExecutor {

@@ -1,5 +1,6 @@
 package net.prosavage.yarpg.chatmenu;
 
+<<<<<<< HEAD
 import me.tom.sparse.spigot.chat.menu.ChatMenu;
 import me.tom.sparse.spigot.chat.menu.element.BooleanElement;
 import me.tom.sparse.spigot.chat.menu.element.ButtonElement;
@@ -24,6 +25,13 @@ import net.prosavage.savagerpg.utils.Color;
 import net.prosavage.savagerpg.utils.INumber;
 >>>>>>> 71fac37... Renamed things back, new & better files manager, more stuff fixed.:src/main/java/net/prosavage/savagerpg/chatmenu/WeaponItemEditor.java
 =======
+=======
+import net.prosavage.yarpg.libs.me.tom.sparse.spigot.chat.menu.ChatMenu;
+import net.prosavage.yarpg.libs.me.tom.sparse.spigot.chat.menu.element.BooleanElement;
+import net.prosavage.yarpg.libs.me.tom.sparse.spigot.chat.menu.element.ButtonElement;
+import net.prosavage.yarpg.libs.me.tom.sparse.spigot.chat.menu.element.InputElement;
+import net.prosavage.yarpg.libs.me.tom.sparse.spigot.chat.menu.element.TextElement;
+>>>>>>> 1a2ab6a... v0.2.0 - A lot of changes
 import net.prosavage.yarpg.api.YCreator;
 import net.prosavage.yarpg.api.keys.YNamespacedKeys;
 import net.prosavage.yarpg.builders.files.AbilityFiles;
@@ -31,13 +39,16 @@ import net.prosavage.yarpg.builders.itemstacks.Weapon;
 import net.prosavage.yarpg.utils.NullValues;
 import net.prosavage.yarpg.utils.Color;
 import net.prosavage.yarpg.utils.INumber;
+<<<<<<< HEAD
 >>>>>>> 44737fc... Renamed things to YaRPG, added in new commands, fixed formatting, file count fixed, etc. / 12:00:11.62 - Sat 04/04/2020:src/main/java/net/prosavage/yarpg/chatmenu/WeaponItemEditor.java
+=======
+import net.prosavage.yarpg.utils.chatmenu.MenuElements;
+>>>>>>> 1a2ab6a... v0.2.0 - A lot of changes
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class WeaponItemEditor {
 <<<<<<< HEAD:src/main/java/net/prosavage/illyriarpg/chatmenu/WeaponItemEditor.java
@@ -55,19 +66,21 @@ public class WeaponItemEditor {
     private NullValues NullValues = new NullValues();
 >>>>>>> 71fac37... Renamed things back, new & better files manager, more stuff fixed.:src/main/java/net/prosavage/savagerpg/chatmenu/WeaponItemEditor.java
 
-    private ButtonElement goToWeaponCreateMenu(ChatMenu menu, Player player, int x, int y, String text, int page){
+    public void openMenu(Player player) {
+        ChatMenu menu = new ChatMenu().pauseChat();
+        menu = setMenuContent(menu, player, 1);
+        menu.openFor(player);
+    }
+
+    private ButtonElement setPageMenuContent(ChatMenu menu, Player player, int x, int y, String text, int page){
         return new ButtonElement(x, y, ChatColor.GREEN + text, player1 -> {
-            menu.setPauseChat(false);
-            menu.close(player);
-            new BukkitRunnable(){
-                @Override
-                public void run() {
-                    getWeaponCreateMenu(player, page);
-                }
-            }.runTaskLater(net.prosavage.yarpg.YaRPG.getInstance(), 1L);
+            new MenuElements(player, menu).clear();
+            setMenuContent(menu, player, page);
+            menu.refresh();
         });
     }
 
+<<<<<<< HEAD
     public void getWeaponCreateMenu(Player player, int page){
 <<<<<<< HEAD:src/main/java/net/prosavage/savagerpg/chatmenu/WeaponItemEditor.java
         ICreator iCreator = new ICreator(player, true);
@@ -179,9 +192,59 @@ public class WeaponItemEditor {
             chatMenu.add(itemBackgroundLoreFive(player, (String) NullValues.replaceNullValues(yCreator.getPersistentWeaponBackgroundLoreFiveInput())));
 >>>>>>> 44737fc... Renamed things to YaRPG, added in new commands, fixed formatting, file count fixed, etc. / 12:00:11.62 - Sat 04/04/2020:src/main/java/net/prosavage/yarpg/chatmenu/WeaponItemEditor.java
             chatMenu.add(goToWeaponCreateMenu(chatMenu, player, 0, 18, "«", page - 1));
+=======
+    public ChatMenu setMenuContent(ChatMenu menu, Player player, int page) {
+        YCreator yCreator = new YCreator(player);
+        MenuElements menuElements = new MenuElements(player, menu);
+        menu.setAutoUnregister(true);
+        menu.add(menuElements.addElement(player, closeDefaultMenu(menu, player)));
+        menu.add(menuElements.addElement(player, new TextElement(0, 16, "Give item? ")));
+        menu.add(menuElements.addElement(player, giveItem(player)));
+        if (page <= 1) {
+            menu.add(menuElements.addElement(player, new TextElement(0, 8, "Weapon name: ")));
+            menu.add(menuElements.addElement(player, new TextElement(0, 10, "Item rarity: ")));
+            menu.add(menuElements.addElement(player, new TextElement(0, 12, "Actual item type: ")));
+            menu.add(menuElements.addElement(player, new TextElement(0, 14, "Display item type: ")));
+            menu.add(menuElements.addElement(player, weaponFileNameInput(player, Color.ify((String) NullValues.replaceNullValues(yCreator.getPersistentWeaponFileName())))));
+            menu.add(menuElements.addElement(player, weaponRarityInput(player, (String) NullValues.replaceNullValues(yCreator.getPersistentWeaponRarityName()))));
+            menu.add(menuElements.addElement(player, weaponMaterialTypeInput(player, (String) NullValues.replaceNullValues(yCreator.getPersistentWeaponMaterialType()))));
+            menu.add(menuElements.addElement(player, weaponDisplayMaterialTypeInput(player, (String) NullValues.replaceNullValues(yCreator.getPersistentWeaponBackgroundMaterialType()))));
+            menu.add(menuElements.addElement(player, setPageMenuContent(menu, player, 200, 18, "»", page + 1)));
         }
-        chatMenu.setPauseChat(true);
-        chatMenu.openFor(player);
+        if (page == 2){
+            menu.add(menuElements.addElement(player, new TextElement(0, 8, "Level input: ")));
+            menu.add(menuElements.addElement(player, new TextElement(0, 10, "Minimum damage: ")));
+            menu.add(menuElements.addElement(player, new TextElement(0, 12, "Maximum damage: ")));
+            menu.add(menuElements.addElement(player, new TextElement(0, 14, "Cooldown: ")));
+            menu.add(menuElements.addElement(player, weaponLevelInput(player, String.valueOf(NullValues.replaceNullValues(yCreator.getPersistentWeaponLevelInput())))));
+            menu.add(menuElements.addElement(player, minimumWeaponDamageInput(player, String.valueOf(NullValues.replaceNullValues(yCreator.getPersistentWeaponMinimumDamageInput())))));
+            menu.add(menuElements.addElement(player, maximumWeaponDamageInput(player, String.valueOf(NullValues.replaceNullValues(yCreator.getPersistentWeaponMaximumDamageInput())))));
+            menu.add(menuElements.addElement(player, weaponAttackCooldown(player, String.valueOf(NullValues.replaceNullValues(yCreator.getPersistentWeaponCooldownInput())))));
+            menu.add(menuElements.addElement(player, setPageMenuContent(menu, player, 200, 18, "»", page + 1)));
+            menu.add(menuElements.addElement(player, setPageMenuContent(menu, player, 0, 18, "«", page - 1)));
+        }
+        if (page == 3){
+            menu.add(menuElements.addElement(player, new TextElement(0, 10, "Gem(s): ")));
+            menu.add(menuElements.addElement(player, new TextElement(0, 12, "Scroll(s): ")));
+            menu.add(menuElements.addElement(player, new TextElement(0, 14, "Ability name: ")));
+            menu.add(menuElements.addElement(player, abilityNameInput(player, (String) NullValues.replaceNullValues(yCreator.getPersistentWeaponAbilityNameInput()))));
+            menu.add(menuElements.addElement(player, gemAmountInput(player, String.valueOf(NullValues.replaceNullValues(yCreator.getPersistentWeaponGemAmountInput())))));
+            menu.add(menuElements.addElement(player, scrollAmountInput(player, String.valueOf(NullValues.replaceNullValues(yCreator.getPersistentWeaponScrollAmountInput())))));
+            menu.add(menuElements.addElement(player, setPageMenuContent(menu, player, 200, 18, "»", page + 1)));
+            menu.add(menuElements.addElement(player, setPageMenuContent(menu, player, 0, 18, "«", page - 1)));
+        }
+        if (page == 4){
+            menu.add(menuElements.addElement(player, new TextElement(0, 2, "Lore description")));
+            menu.add(menuElements.addElement(player, new TextElement(0, 4, "Use || to for new lines i.e. a||b")));
+            menu.add(menuElements.addElement(player, itemBackgroundLoreOne(player, (String) NullValues.replaceNullValues(yCreator.getPersistentWeaponBackgroundLoreOneInput()))));
+            menu.add(menuElements.addElement(player, itemBackgroundLoreTwo(player, (String) NullValues.replaceNullValues(yCreator.getPersistentWeaponBackgroundLoreTwoInput()))));
+            menu.add(menuElements.addElement(player, itemBackgroundLoreThree(player, (String) NullValues.replaceNullValues(yCreator.getPersistentWeaponBackgroundLoreThreeInput()))));
+            menu.add(menuElements.addElement(player, itemBackgroundLoreFour(player, (String) NullValues.replaceNullValues(yCreator.getPersistentWeaponBackgroundLoreFourInput()))));
+            menu.add(menuElements.addElement(player, itemBackgroundLoreFive(player, (String) NullValues.replaceNullValues(yCreator.getPersistentWeaponBackgroundLoreFiveInput()))));
+            menu.add(menuElements.addElement(player, setPageMenuContent(menu, player, 0, 18, "«", page - 1)));
+>>>>>>> 1a2ab6a... v0.2.0 - A lot of changes
+        }
+        return menu;
     }
 
     private ButtonElement closeDefaultMenu(ChatMenu menu, Player player){
@@ -282,9 +345,6 @@ public class WeaponItemEditor {
                 ItemStack itemStack = weapon.build();
                 player.getInventory().addItem(itemStack);
                 player.getPersistentDataContainer().set(YNamespacedKeys.CREATOR_WEAPON_GIVE_ITEM, PersistentDataType.BYTE, (byte)0);
-            }
-            for (int i = 0; i < 200; i++){
-                player.sendMessage("\n");
             }
         });
     }

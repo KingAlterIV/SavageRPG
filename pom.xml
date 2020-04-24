@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.prosavage</groupId>
-    <artifactId>SavageRPG</artifactId>
-    <version>0.1.5b</version>
+    <artifactId>YaRPG</artifactId>
+    <version>0.2.0</version>
     <packaging>jar</packaging>
 
-    <name>SavageRPG - ${project.version}</name>
+    <name>YaRPG - ${project.version}</name>
 
     <description>An RPG core</description>
     <properties>
@@ -67,7 +67,12 @@
             <id>dmulloy2-repo</id>
             <url>https://repo.dmulloy2.net/nexus/repository/public/</url>
         </repository>
+        <repository>
+            <id>frost-repo</id>
+            <url>https://repo.frostalf.net/</url>
+        </repository>
     </repositories>
+
 
     <dependencies>
         <dependency>
@@ -93,11 +98,11 @@
         <!-- These must be locally installed! -->
 
         <dependency>
-            <groupId>me.tom.sparse.spigot.chat.menu</groupId>
-            <artifactId>ChatMenuAPI</artifactId>
-            <version>1.0</version>
+            <groupId>com.github.azbh111</groupId>
+            <artifactId>ProtocolLib</artifactId>
+            <version>4.4.0</version>
             <scope>system</scope>
-            <systemPath>${pom.basedir}\libs\ChatMenuAPI.jar</systemPath>
+            <systemPath>${pom.basedir}\libs\ProtocolLib.jar</systemPath>
             <optional>true</optional>
         </dependency>
 

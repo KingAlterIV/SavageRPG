@@ -8,22 +8,27 @@ import org.bukkit.persistence.PersistentDataType;
 
 public class YEntity {
 
-    public String getName(Entity entity){
-        PersistentDataContainer persistentDataContainer = entity.getPersistentDataContainer();
+    Entity entity;
+    PersistentDataContainer persistentDataContainer;
+
+    public YEntity(Entity entity) {
+        this.entity = entity;
+        this.persistentDataContainer = entity.getPersistentDataContainer();
+    }
+
+    public String getName(){
         return persistentDataContainer.getOrDefault(YNamespacedKeys.ENTITY_NAME, PersistentDataType.STRING, entity.getType().toString());
     }
 
-    public int getLevel(Entity entity){
-        PersistentDataContainer persistentDataContainer = entity.getPersistentDataContainer();
+    public int getLevel(){
         return persistentDataContainer.getOrDefault(YNamespacedKeys.ENTITY_LEVEL, PersistentDataType.INTEGER, 1);
     }
 
-    public String getRegion(Entity entity){
-        PersistentDataContainer persistentDataContainer = entity.getPersistentDataContainer();
+    public String getRegion(){
         return persistentDataContainer.getOrDefault(YNamespacedKeys.ENTITY_REGION, PersistentDataType.STRING, "null");
     }
 
-    public double getHealth(Entity entity){
+    public double getHealth(){
         if (entity instanceof Damageable){
             Damageable damageable = (Damageable) entity;
             return damageable.getHealth();
@@ -31,58 +36,47 @@ public class YEntity {
         return 20.0;
     }
 
-    public double getMinimumHealth(Entity entity){
-        PersistentDataContainer persistentDataContainer = entity.getPersistentDataContainer();
+    public double getMinimumHealth(){
         return persistentDataContainer.getOrDefault(YNamespacedKeys.ENTITY_MINIMUM_HEALTH, PersistentDataType.DOUBLE, 1.0);
     }
 
-    public double getMaximumHealth(Entity entity){
-        PersistentDataContainer persistentDataContainer = entity.getPersistentDataContainer();
+    public double getMaximumHealth(){
         return persistentDataContainer.getOrDefault(YNamespacedKeys.ENTITY_MINIMUM_HEALTH, PersistentDataType.DOUBLE, 1.0);
     }
 
-    public double getEXP(Entity entity){
-        PersistentDataContainer persistentDataContainer = entity.getPersistentDataContainer();
-        return persistentDataContainer.getOrDefault(YNamespacedKeys.ENTITY_EXP, PersistentDataType.DOUBLE, 1.0);
+    public double getEXP(){
+        return persistentDataContainer.getOrDefault(YNamespacedKeys.ENTITY_EXPERIENCE, PersistentDataType.DOUBLE, 1.0);
     }
 
-    public double getMinimumEXP(Entity entity){
-        PersistentDataContainer persistentDataContainer = entity.getPersistentDataContainer();
-        return persistentDataContainer.getOrDefault(YNamespacedKeys.ENTITY_MINIMUM_EXP, PersistentDataType.DOUBLE, 1.0);
+    public double getMinimumEXP(){
+        return persistentDataContainer.getOrDefault(YNamespacedKeys.ENTITY_MINIMUM_EXPERIENCE, PersistentDataType.DOUBLE, 1.0);
     }
 
-    public double getMaximumEXP(Entity entity){
-        PersistentDataContainer persistentDataContainer = entity.getPersistentDataContainer();
-        return persistentDataContainer.getOrDefault(YNamespacedKeys.ENTITY_MAXIMUM_EXP, PersistentDataType.DOUBLE, 1.0);
+    public double getMaximumEXP(){
+        return persistentDataContainer.getOrDefault(YNamespacedKeys.ENTITY_MAXIMUM_EXPERIENCE, PersistentDataType.DOUBLE, 1.0);
     }
 
-    public double getDamage(Entity entity){
-        PersistentDataContainer persistentDataContainer = entity.getPersistentDataContainer();
+    public double getDamage(){
         return persistentDataContainer.getOrDefault(YNamespacedKeys.ENTITY_DAMAGE, PersistentDataType.DOUBLE, 1.0);
     }
 
-    public double getMinimumDamage(Entity entity){
-        PersistentDataContainer persistentDataContainer = entity.getPersistentDataContainer();
+    public double getMinimumDamage(){
         return persistentDataContainer.getOrDefault(YNamespacedKeys.ENTITY_MINIMUM_DAMAGE, PersistentDataType.DOUBLE, 1.0);
     }
 
-    public double getMaximumDamage(Entity entity){
-        PersistentDataContainer persistentDataContainer = entity.getPersistentDataContainer();
+    public double getMaximumDamage(){
         return persistentDataContainer.getOrDefault(YNamespacedKeys.ENTITY_MAXIMUM_DAMAGE, PersistentDataType.DOUBLE, 1.0);
     }
 
-    public double getProtection(Entity entity){
-        PersistentDataContainer persistentDataContainer = entity.getPersistentDataContainer();
+    public double getProtection(){
         return persistentDataContainer.getOrDefault(YNamespacedKeys.ENTITY_PROTECTION, PersistentDataType.DOUBLE, 1.0);
     }
 
-    public double getMinimumProtection(Entity entity){
-        PersistentDataContainer persistentDataContainer = entity.getPersistentDataContainer();
+    public double getMinimumProtection(){
         return persistentDataContainer.getOrDefault(YNamespacedKeys.ENTITY_MINIMUM_PROTECTION, PersistentDataType.DOUBLE, 1.0);
     }
 
     public double getMaximumProtection(Entity entity) {
-        PersistentDataContainer persistentDataContainer = entity.getPersistentDataContainer();
         return persistentDataContainer.getOrDefault(YNamespacedKeys.ENTITY_MAXIMUM_PROTECTION, PersistentDataType.DOUBLE, 1.0);
     }
 

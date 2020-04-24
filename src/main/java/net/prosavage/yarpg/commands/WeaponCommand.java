@@ -32,7 +32,7 @@ public class WeaponCommand implements CommandExecutor {
             }
             else {
                 if (args[0].equalsIgnoreCase("edit")) {
-                    WeaponItemEditor.getWeaponCreateMenu(player, 1);
+                    WeaponItemEditor.openMenu(player);
                 }else if (args[0].equalsIgnoreCase("yaml")){
                     if (args[1].equalsIgnoreCase("example")) {
                         new WeaponFiles("example", "example").setActualMaterial("STONE_SWORD").getExample();
